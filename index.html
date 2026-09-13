@@ -1,3 +1,4 @@
+<!-- Pozioni tool v92 — tabella ufficiale dei post inserita in un details contestuale nella fase Imbottigliamento/Pulizia; solo riferimento visivo, nessuna modifica ai calcoli. -->
 <!-- Pozioni tool v91 — terzo audit Azioni Illegali: anche la dichiarazione di illegalità delle Pozioni inserite manualmente viene fissata dopo l’avvio del primo controllo, impedendo di disattivarla tornando alla schermata iniziale. -->
 <!-- Pozioni tool v90 — audit Azioni Illegali: il dado 1d30/1d50 viene fotografato all’avvio del singolo controllo; le protezioni possono essere aggiornate tra Produzione e Bacchetta senza alterare il tiro già concluso. -->
 <!-- Pozioni tool v89 — gate bloccanti anti-metagame anche per tutte le Pozioni la cui creazione è illegale: Produzione e Uso della Bacchetta, 1d30/1d50 + protezioni; Narratore solo con esito 1. -->
@@ -1146,6 +1147,30 @@
     width:100% !important;
   }
 }
+
+/* ---------- tabella ufficiale dei post ---------- */
+#creazione-pozione .poz-post-reference-table{
+  margin:14px 0 18px !important;
+  border:1px solid rgba(159,190,40,.42) !important;
+  border-radius:8px !important;
+  overflow:hidden !important;
+  background:#171a1b !important;
+}
+#creazione-pozione .poz-post-reference-table > summary{
+  cursor:pointer !important;
+  list-style:none !important;
+  padding:11px 13px !important;
+  background:linear-gradient(180deg,rgba(53,22,63,.72),rgba(30,34,35,.96)) !important;
+  color:var(--acid-soft) !important;
+  font-weight:700 !important;
+  user-select:none !important;
+}
+#creazione-pozione .poz-post-reference-table > summary::-webkit-details-marker{display:none !important;}
+#creazione-pozione .poz-post-reference-table > summary:after{content:" +" !important;float:right !important;color:var(--acid-soft) !important;font-weight:900 !important;}
+#creazione-pozione .poz-post-reference-table[open] > summary:after{content:" −" !important;}
+#creazione-pozione .poz-post-reference-body{padding:12px !important;background:#f4f1ea !important;color:#292721 !important;}
+#creazione-pozione .poz-post-reference-body img{display:block !important;width:100% !important;height:auto !important;max-width:980px !important;margin:0 auto !important;border-radius:4px !important;}
+#creazione-pozione .poz-post-reference-note{margin:10px 0 0 !important;padding:10px 12px !important;border:1px solid #a8b46d !important;border-radius:6px !important;background:#eef2df !important;color:#263017 !important;line-height:1.45 !important;}
 
 /* ---------- accessibilità / stati interattivi ---------- */
 #creazione-pozione button:focus-visible,
@@ -5699,6 +5724,26 @@ function renderImbottStep(container){
  "Costo base: -2 Fatica (0 con Sapienza Pozionistica 25). Se usi Sintesi Tecnica+, aggiungi il suo costo di -2 Fatica: il tool ne determina prima l'Efficacia con 1d10 e applica la riduzione dei post prevista. " +
  "Gli eventuali bonus da <b>Oggetti/Conoscenze</b> scelti nello Step 2 e assegnati all’Imbottigliamento modificano il risultato del d10; il Calderone/strumento scelto nello Step 2 viene invece applicato automaticamente e non va duplicato. Se Sintesi Tecnica+ si cumula con un manufatto che riduce i post <i>per difetto</i>, il materiale disponibile non stabilisce quale riduzione vada applicata per prima: poiché l’arrotondamento può cambiare il totale, il tool richiede di indicare esplicitamente l’ordine invece di inventarlo. " +
  "I range del d10 e il numero di post finali sono calcolati direttamente secondo la tabella del regolamento.")); 
+
+ var postRef = document.createElement("details");
+ postRef.className = "poz-post-reference-table";
+ var postRefSummary = document.createElement("summary");
+ postRefSummary.innerHTML = '<i class="fa-solid fa-table" aria-hidden="true"></i> Visualizza la tabella ufficiale dei post';
+ postRef.appendChild(postRefSummary);
+ var postRefBody = document.createElement("div");
+ postRefBody.className = "poz-post-reference-body";
+ var postRefImg = document.createElement("img");
+ postRefImg.src = "https://i.postimg.cc/Pr08WnGJ/image.png";
+ postRefImg.loading = "lazy";
+ postRefImg.decoding = "async";
+ postRefImg.alt = "Tabella ufficiale dei post di Pozioni";
+ postRefBody.appendChild(postRefImg);
+ var postRefNote = document.createElement("div");
+ postRefNote.className = "poz-post-reference-note";
+ postRefNote.innerHTML = 'Tabella di riferimento del regolamento. <b>Il calcolo dei post finali resta automatico</b>: non devi riportare manualmente questi valori nel tool.';
+ postRefBody.appendChild(postRefNote);
+ postRef.appendChild(postRefBody);
+ p.appendChild(postRef);
 
  if(appendSetupGate(p)){ container.appendChild(p); return; }
  if(appendDependencyGate(p, "imbott")){ container.appendChild(p); return; }
