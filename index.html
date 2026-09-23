@@ -1,3 +1,5 @@
+<!-- Pozioni tool v95 — gerarchia ancora più compatta: opzioni secondarie a scomparsa con anteprima, regolamento contestuale e tabelle richiudibili, navigazione più nitida, azioni e risultato dei dadi prioritarie; nessuna regola o formula modificata. -->
+<!-- Pozioni tool v94 — ulteriori migliorie UX/UI: opzioni speciali sempre riconoscibili ma richiuse per impostazione predefinita, contesto leggibile anche da chiuso, stato di apertura conservato durante le modifiche, azioni primarie e risultati evidenziati; zero modifiche ai calcoli. -->
 <!-- Pozioni tool v93 — revisione UX/UI: pagina iniziale guidata, disclosure progressiva, copia senza salto pagina, malus Preparazione nella frase Inventario, conseguenze finali gerarchizzate; nessuna nuova lettura Firebase. -->
 <!-- Pozioni tool v92 — tabella ufficiale dei post inserita in un details contestuale nella fase Imbottigliamento/Pulizia; solo riferimento visivo, nessuna modifica ai calcoli. -->
 <!-- Pozioni tool v91 — terzo audit Azioni Illegali: anche la dichiarazione di illegalità delle Pozioni inserite manualmente viene fissata dopo l’avvio del primo controllo, impedendo di disattivarla tornando alla schermata iniziale. -->
@@ -1708,6 +1710,85 @@
   }
 }
 
+
+/* =============================================================
+   v94 — LEGGIBILITÀ PRIMA DELLE ECCEZIONI
+   Tutte le regole sono circoscritte al tool, non al forum.
+   ============================================================= */
+#creazione-pozione .wrap{padding-top:23px !important;}
+#creazione-pozione .seal{width:45px !important;height:45px !important;font-size:21px !important;margin-bottom:8px !important;box-shadow:none !important;}
+#creazione-pozione .main-title{font-size:35px !important;margin-bottom:7px !important;}
+#creazione-pozione .main-title:after{margin:9px auto 0 !important;}
+#creazione-pozione .subtitle{margin:0 auto 20px !important;font-size:14px !important;}
+#creazione-pozione .steps-nav{gap:6px !important;margin-bottom:17px !important;}
+#creazione-pozione button.step-btn{display:flex !important;flex-direction:column !important;align-items:flex-start !important;justify-content:center !important;gap:3px !important;min-height:55px !important;padding:9px 12px !important;background:#202526 !important;border-color:#3b4441 !important;border-radius:8px !important;box-shadow:none !important;color:#bdbfb8 !important;font:500 13px/1.3 var(--serif) !important;letter-spacing:0 !important;text-align:left !important;}
+#creazione-pozione button.step-btn:hover:not(:disabled){background:#303638 !important;border-color:#84944c !important;color:#fff !important;}
+#creazione-pozione button.step-btn.active{background:#303922 !important;border:2px solid var(--acid) !important;color:#fafce9 !important;box-shadow:0 2px 0 rgba(159,190,40,.18) !important;}
+#creazione-pozione button.step-btn:disabled{opacity:.36 !important;}
+#creazione-pozione .step-index{font:700 10px/1.1 var(--mono) !important;color:#a1b65d !important;letter-spacing:.06em !important;}
+#creazione-pozione .step-label{font:500 14px/1.25 var(--serif) !important;}
+#creazione-pozione button.step-btn.active .step-index{color:#dcf19c !important;}
+#creazione-pozione .step-optional-mark{font:500 10px/1.2 var(--serif) !important;color:#afaaa9 !important;}
+#creazione-pozione .panel{padding:23px 26px 27px !important;border-color:#45504b !important;background:#262c2c !important;box-shadow:0 8px 22px rgba(0,0,0,.17) !important;}
+#creazione-pozione .panel:before{opacity:.27 !important;}
+#creazione-pozione .panel h2{margin-bottom:12px !important;font-size:27px !important;}
+#creazione-pozione .ux-stage-overline{color:#bccb8a !important;font:700 10px/1.3 var(--mono) !important;letter-spacing:.13em !important;text-transform:uppercase !important;margin:0 0 9px !important;}
+#creazione-pozione .ux-task-strip{display:flex !important;gap:11px !important;align-items:flex-start !important;margin:0 0 17px !important;padding:12px 14px !important;border:1px solid rgba(159,190,40,.32) !important;border-left:3px solid var(--acid) !important;border-radius:8px !important;background:rgba(159,190,40,.07) !important;color:#eceee1 !important;font:500 14px/1.48 var(--serif) !important;}
+#creazione-pozione .ux-task-strip .ux-task-icon{display:inline-flex !important;flex:0 0 25px !important;align-items:center !important;justify-content:center !important;width:25px !important;height:25px !important;border-radius:50% !important;background:rgba(159,190,40,.20) !important;color:#edf8b8 !important;font:700 12px var(--mono) !important;}
+#creazione-pozione .ux-task-strip strong{color:#f3f8dc !important;}
+#creazione-pozione details.ux-optional{margin:10px 0 14px !important;overflow:hidden !important;border:1px solid #454e4b !important;border-radius:9px !important;background:rgba(13,16,16,.22) !important;box-shadow:none !important;}
+#creazione-pozione details.ux-optional > summary{position:relative !important;display:flex !important;align-items:center !important;justify-content:space-between !important;gap:10px !important;padding:12px 38px 12px 13px !important;cursor:pointer !important;list-style:none !important;background:#232829 !important;color:#ebede6 !important;user-select:none !important;}
+#creazione-pozione details.ux-optional > summary::-webkit-details-marker{display:none !important;}
+#creazione-pozione details.ux-optional > summary::after{content:'⌄' !important;position:absolute !important;right:13px !important;top:50% !important;float:none !important;transform:translateY(-50%) !important;color:#d8decd !important;font:700 20px/1 var(--serif) !important;}
+#creazione-pozione details.ux-optional[open] > summary::after{content:'⌃' !important;}
+#creazione-pozione details.ux-optional > summary:hover{background:#303637 !important;}
+#creazione-pozione details.ux-optional > summary:focus-visible{outline:2px solid var(--acid-soft) !important;outline-offset:-3px !important;}
+#creazione-pozione .ux-opt-copy{display:flex !important;flex-direction:column !important;gap:3px !important;min-width:0 !important;flex:1 1 auto !important;}
+#creazione-pozione .ux-opt-title{color:#e8ebe2 !important;font:700 14px/1.35 var(--serif) !important;}
+#creazione-pozione .ux-opt-hint{color:#aeb7ae !important;font:400 12px/1.4 var(--serif) !important;}
+#creazione-pozione .ux-opt-badge{flex:0 0 auto !important;max-width:38% !important;padding:4px 7px !important;border:1px solid #526055 !important;border-radius:6px !important;color:#c8d3c4 !important;background:#29332e !important;font:700 10px/1.3 var(--mono) !important;text-align:center !important;overflow-wrap:anywhere !important;}
+#creazione-pozione details.ux-optional.has-active{border-color:#839849 !important;}
+#creazione-pozione details.ux-optional.has-active > summary{background:#293227 !important;}
+#creazione-pozione details.ux-optional.has-active .ux-opt-badge{background:#435225 !important;border-color:#acc657 !important;color:#f0f7d2 !important;}
+#creazione-pozione .ux-optional-body{padding:12px 13px 15px !important;border-top:1px solid #424d45 !important;}
+#creazione-pozione .ux-optional-body > :first-child{margin-top:0 !important;}
+#creazione-pozione .ux-optional-body > :last-child{margin-bottom:0 !important;}
+#creazione-pozione .ux-optional-body .guide-text,#creazione-pozione .ux-optional-body .phase-extra-control,#creazione-pozione .ux-optional-body .tracked-effect-editor{margin:0 !important;}
+#creazione-pozione .ux-optional-body .phase-extra-control,#creazione-pozione .ux-optional-body .tracked-effect-editor{padding:0 !important;border:none !important;background:transparent !important;box-shadow:none !important;}
+#creazione-pozione .ux-optional-body .phase-extra-title,#creazione-pozione .ux-optional-body .tracked-effect-title{display:none !important;}
+#creazione-pozione .ux-optional-body .advanced-grid{margin-top:8px !important;}
+#creazione-pozione .ux-optional-body .phase-help{color:#b9c0b8 !important;}
+#creazione-pozione .ux-inline-status{margin:5px 0 13px !important;padding:7px 10px !important;border-left:2px solid #627745 !important;background:rgba(159,190,40,.06) !important;color:#d6debd !important;font-size:13px !important;}
+#creazione-pozione .compact-explainer{margin:2px 0 14px !important;border-color:#3d4544 !important;background:rgba(13,16,16,.20) !important;}
+#creazione-pozione .compact-explainer > summary{padding:9px 12px !important;background:#24292a !important;color:#cbd2c5 !important;font-weight:500 !important;}
+#creazione-pozione .compact-explainer > summary:hover{background:#343b3b !important;color:#fff !important;}
+#creazione-pozione .compact-explainer-body{padding:11px 13px 12px !important;}
+#creazione-pozione .info-selector-card{margin-top:7px !important;padding:13px 15px !important;background:#1f2525 !important;border:1px solid #738844 !important;}
+#creazione-pozione .selected-potion-card{margin:7px 0 13px !important;padding:12px 14px !important;}
+#creazione-pozione .selected-potion-grid{gap:6px !important;}
+#creazione-pozione .selected-potion-stat{padding:8px 9px !important;}
+#creazione-pozione .setup-next-card{display:none !important;} /* sostituito dal singolo invito all'azione contestuale */
+#creazione-pozione .pg-card{padding:17px 18px !important;border-color:#47514e !important;background:#242a2a !important;box-shadow:none !important;}
+#creazione-pozione .pg-card:before{opacity:.45 !important;}
+#creazione-pozione .pg-card h3{margin:0 0 14px !important;padding-bottom:8px !important;}
+#creazione-pozione .pg-card > .divider{margin:15px 0 11px !important;opacity:.6 !important;}
+#creazione-pozione .pg-card > .result-line{padding:11px 12px !important;margin:7px 0 !important;border:1px solid #59665a !important;border-radius:8px !important;background:rgba(12,16,15,.35) !important;}
+#creazione-pozione .pg-card .result-line > input[type=number]{min-width:94px !important;min-height:46px !important;border:2px solid #8c9e65 !important;background:#151b18 !important;color:#f9fff1 !important;font-weight:700 !important;font-size:16px !important;}
+#creazione-pozione .pg-card .result-line > input[type=number]:focus{border-color:var(--acid-soft) !important;box-shadow:0 0 0 3px rgba(159,190,40,.17) !important;}
+#creazione-pozione .dice-code{border-color:#46524c !important;background:#181e1d !important;}
+#creazione-pozione button.copy-btn{min-height:44px !important;background:#4c612a !important;border:1px solid #9fbe67 !important;color:#f9ffef !important;font-weight:700 !important;}
+#creazione-pozione button.copy-btn:hover:not(:disabled){background:#627a32 !important;border-color:#d4ee87 !important;}
+#creazione-pozione .step-actions{justify-content:flex-end !important;margin:18px 0 0 !important;padding:14px 0 0 !important;border-top:1px solid #445049 !important;}
+#creazione-pozione button.action.primary{min-height:48px !important;padding:11px 20px !important;font-weight:800 !important;font-size:15px !important;}
+#creazione-pozione button.action.danger{opacity:.82 !important;margin-left:auto !important;}
+#creazione-pozione button.action.danger:hover{opacity:1 !important;}
+#creazione-pozione .ux-validation{padding:11px 13px !important;margin:11px 0 !important;border-left:4px solid var(--danger) !important;border-radius:7px !important;background:#3d282c !important;color:#ffe9e7 !important;}
+#creazione-pozione .poz-session-create button{background:#58702e !important;border-color:#b6d470 !important;color:#fff !important;font-weight:800 !important;}
+#creazione-pozione .poz-session-create button:hover{background:#688640 !important;}
+#creazione-pozione input[type=text]:focus-visible,#creazione-pozione input[type=number]:focus-visible,#creazione-pozione select:focus-visible,#creazione-pozione textarea:focus-visible{outline:2px solid var(--acid-soft) !important;outline-offset:1px !important;}
+@media(max-width:820px){#creazione-pozione .steps-nav{gap:7px !important;}#creazione-pozione button.step-btn{min-width:145px !important;flex:0 0 145px !important;}}
+@media(max-width:600px){#creazione-pozione .wrap{padding-top:15px !important;}#creazione-pozione .panel{padding:18px 14px 22px !important;}#creazione-pozione .main-title{font-size:30px !important;}#creazione-pozione .ux-task-strip{padding:11px !important;}#creazione-pozione details.ux-optional > summary{flex-direction:column !important;align-items:flex-start !important;gap:7px !important;}#creazione-pozione .ux-opt-badge{max-width:92% !important;}#creazione-pozione .pg-card{padding:14px 12px !important;}#creazione-pozione button.action.danger{margin-left:0 !important;}}
+
 </style>
 
 <style id="v62-sessioni-firebase-css">
@@ -1816,9 +1897,7 @@
  <div class="seal" aria-hidden="true"><i class="fa-solid fa-flask"></i></div>
  <h1 class="main-title">• Creazione di una Pozione •</h1> 
  <p class="subtitle">Segui i passaggi uno alla volta: la pagina calcola formule e dadi, tu incolli i codici [dice] sul forum.</p> 
-<br> 
  <div class="steps-nav" id="stepsNav" aria-label="Fasi della creazione della Pozione"></div> 
-<br> 
  <div id="stepContainer" aria-live="polite"></div> 
 </div> 
 <br> 
@@ -2140,6 +2219,66 @@
  { key:"riepilogo", label:"8. Riepilogo" } 
  ]; 
  var currentStep = "info";
+
+ /* v94 — stato dell'interfaccia, separato dai dati del PG e dai calcoli. */
+ var uxFoldState=Object.create(null);
+ window.__pozUxGetFold=function(key){return !!uxFoldState[key];};
+ window.__pozUxSetFold=function(key,value){uxFoldState[key]=!!value;};
+ var UX_TASKS={
+  info:["Seleziona la Pozione", "Scegli dal Pozionario oppure inserisci i dati, poi conferma la Conoscenza."],
+  pg:["Inserisci i dati del PG", "Indica Tipo, Tecnica e voto o Sapienza. Gli altri campi sono raccolti sotto Opzioni facoltative."],
+  prep:["Esegui i d14 degli Ingredienti", "Copia il codice di ciascuna fascia, tira sul forum e inserisci il risultato. Eventuali rimedi compariranno se necessari."],
+  prod:["Completa il tiro di Produzione", "Copia il d30, tira sul forum e inserisci il risultato. Se necessario, risolvi prima il controllo di legalità."],
+  bacchetta:["Determina l'effetto e le dosi", "Copia il d15, inserisci il risultato e completa l'eventuale tiro delle dosi."],
+  imbott:["Imbottiglia e pulisci", "Copia il d10, registra il risultato e verifica i post e le dosi finali."],
+  distill:["Distillazione facoltativa", "Se il PG possiede Distillatore, aggiungi solo le dosi da distillare. Altrimenti vai direttamente al Riepilogo."],
+  riepilogo:["Verifica e copia gli esiti", "Controlla dosi, Fatica e conseguenze; poi copia le frasi per Inventario e Dispensa."]
+ };
+ function uxCaptureFolds(root){
+  if(!root||!root.querySelectorAll)return;
+  var ds=root.querySelectorAll('details[data-ux-key]');
+  for(var i=0;i<ds.length;i++){uxFoldState[ds[i].getAttribute('data-ux-key')]=ds[i].open;}
+ }
+ function uxInitDetails(d,key,defaultOpen){
+  d.setAttribute('data-ux-key',key);
+  d.open=Object.prototype.hasOwnProperty.call(uxFoldState,key)?!!uxFoldState[key]:!!defaultOpen;
+  d.addEventListener('toggle',function(){uxFoldState[key]=d.open;});
+  return d;
+ }
+ function uxOptional(key,title,hint,body,opts){
+  opts=opts||{};
+  var d=document.createElement('details');d.className='ux-optional'+(opts.active?' has-active':'');
+  uxInitDetails(d,key,!!opts.open);
+  var summary=document.createElement('summary'),copy=el('span','ux-opt-copy');
+  copy.appendChild(elText('span','ux-opt-title',title));
+  if(hint){copy.appendChild(elText('span','ux-opt-hint',hint));}
+  summary.appendChild(copy);
+  if(opts.badge){summary.appendChild(elText('span','ux-opt-badge',opts.badge));}
+  d.appendChild(summary);
+  var content=el('div','ux-optional-body');if(body){content.appendChild(body);}d.appendChild(content);
+  return d;
+ }
+ function uxShowValidation(panel,message){
+  var old=panel.querySelector(':scope > .ux-validation');if(old)old.remove();
+  var warn=elText('div','ux-validation',message);warn.setAttribute('role','alert');warn.tabIndex=-1;
+  var task=panel.querySelector(':scope > .ux-task-strip');
+  if(task){task.insertAdjacentElement('afterend',warn);}else{panel.insertBefore(warn,panel.firstChild);}
+  warn.focus();
+ }
+ function uxAddStageGuide(container){
+  var panel=container&&container.querySelector(':scope > .panel');if(!panel)return;
+  var h=panel.querySelector(':scope > h2');if(!h)return;
+  var idx=-1;for(var i=0;i<steps.length;i++){if(steps[i].key===currentStep){idx=i;break;}}
+  var over=elText('div','ux-stage-overline',idx>=0?'PASSAGGIO '+(idx+1)+' DI '+steps.length+(currentStep==='distill'?' · FACOLTATIVO':''):'PERCORSO');
+  panel.insertBefore(over,h);
+  var task=UX_TASKS[currentStep];if(!task)return;
+  var cue=el('div','ux-task-strip');
+  cue.appendChild(elText('span','ux-task-icon',idx>=0?String(idx+1):'→'));
+  var text=el('div');text.appendChild(elText('strong',null,task[0]+'. '));text.appendChild(document.createTextNode(task[1]));
+  cue.appendChild(text);
+  h.insertAdjacentElement('afterend',cue);
+ }
+
  
  /* ---------- SALVATAGGIO LOCALE ---------- */
  /* v52: i bonus che aumentano Tecnica vengono registrati una sola volta nello Step 2. Il tool calcola una Tecnica effettiva (Tecnica base + bonus da Oggetti/Conoscenze) e usa quel valore in tutte le formule che dipendono da Tecnica. I bonus delle singole fasi restano invece bonus diretti della fase. */
@@ -3417,27 +3556,18 @@ function faticaObbligatoriaTotale(pg){
   requestPozioniTop();
  }
 
- /* Le spiegazioni davvero lunghe diventano richiudibili; avvisi/esiti brevi restano sempre visibili. */
+ /* Le istruzioni introduttive sono richiamabili; errori, blocchi e risultati restano leggibili. */
  function collapseLongExplanations(root){
-  if(!root || !root.querySelectorAll){ return; }
-  var nodes=root.querySelectorAll("p.small-note, div.guide-text");
-  for(var i=0;i<nodes.length;i++){
-   var node=nodes[i];
-   if(!node || node.closest("details.compact-explainer") || node.getAttribute("data-no-collapse")==="1"){ continue; }
-   if(node.querySelector("input,select,button,textarea")){ continue; }
-   var txt=String(node.textContent||"").replace(/\s+/g," ").trim();
-   var limit=node.classList.contains("guide-text")?390:230;
-   if(txt.length<limit){ continue; }
-   var details=document.createElement("details");
-   details.className="compact-explainer";
-   var summary=document.createElement("summary");
-   summary.textContent=node.classList.contains("guide-text")?"Come funziona / dettagli":"Dettagli e regole";
-   var body=document.createElement("div");
-   body.className="compact-explainer-body";
-   node.parentNode.insertBefore(details,node);
-   details.appendChild(summary);
-   body.appendChild(node);
-   details.appendChild(body);
+  if(!root||!root.querySelector)return;
+  var panel=root.querySelector(':scope > .panel');if(!panel)return;
+  var h=panel.querySelector(':scope > h2');if(!h)return;
+  var direct=panel.querySelector(':scope > .guide-text');
+  if(!direct||direct.getAttribute('data-no-collapse')==='1'||direct.querySelector('input,select,button,textarea'))return;
+  if((currentStep==='info'||currentStep==='pg'||currentStep==='prep'||currentStep==='prod'||currentStep==='bacchetta'||currentStep==='imbott'||currentStep==='distill'||currentStep==='riepilogo')&&direct.textContent.length>100){
+   var hint={info:'Selezione dal Pozionario e inserimento manuale',pg:'Voti, Tecnica e Conoscenze del PG',prep:'Possibilità, errori e rimedi dei d14',prod:'Esiti, malus e Fatica del d30',bacchetta:'Dosi, Tocco Magico e Fatica del d15',imbott:'Esiti e post richiesti nella fase finale',distill:'Regole per distillare una o più dosi',riepilogo:'Interpretazione del riepilogo'}[currentStep]||'Regole e spiegazioni';
+   var parent=direct.parentNode, next=direct.nextSibling;
+   var d=uxOptional('phase-intro-'+currentStep,'Come funziona questa fase',hint,direct,{badge:'Spiegazioni'});
+   if(next){parent.insertBefore(d,next);}else{parent.appendChild(d);}
   }
  }
 
@@ -3445,15 +3575,17 @@ function renderNav(){
  var nav = document.getElementById("stepsNav"); 
  nav.innerHTML = ""; 
  
- for(var i = 0; i < steps.length; i++){ 
- (function(s){ 
- var b = el( 
- "button", 
- "step-btn" + (s.key === currentStep ? " active" : ""), 
- s.label 
- ); 
- if(s.key === currentStep){ b.setAttribute("aria-current", "step"); }
+ for(var i = 0; i < steps.length; i++){
+ (function(s){
  var targetIndex=steps.indexOf(s);
+ var num=String(targetIndex+1);if(num.length===1)num='0'+num;
+ var cleanLabel=String(s.label).replace(/^\d+\.\s*/,'');
+ var b=el('button','step-btn'+(s.key===currentStep?' active':''),
+  '<span class="step-index">'+num+' / 08</span><span class="step-label">'+escapeHtml(cleanLabel)+'</span>'+
+  (s.key==='distill'?'<span class="step-optional-mark">Facoltativo</span>':''));
+ b.setAttribute('aria-label','Vai a: '+cleanLabel+(s.key==='distill'?' (facoltativa)':''));
+ b.setAttribute('data-step-key',s.key);
+ if(s.key === currentStep){ b.setAttribute("aria-current", "step"); }
  if(targetIndex>=2 && pozV88IngredientGateBlocksProgress()){
   b.disabled=true;
   b.title="Risolvi prima il controllo dell'Azione Illegale nello Step Personaggio.";
@@ -3791,6 +3923,7 @@ function renderAll(){
  invalidateStaleResultsIfNeeded();
  var c = document.getElementById("stepContainer");
  try{
+  uxCaptureFolds(c);
   renderNav();
   c.innerHTML = "";
   if(currentStep === "info"){ renderInfoStep(c); }
@@ -3802,6 +3935,7 @@ function renderAll(){
   if(currentStep === "distill"){ renderDistillStep(c); }
   if(currentStep === "riepilogo"){renderRiepilogoStep(c);}
   if(staleResultsResetNotice&&c){var resetWarn=el("div","guide-text","<b>Risultati aggiornati.</b> Hai modificato un dato che incide sulle formule: i dadi e gli esiti già inseriti sono stati azzerati per evitare risultati incoerenti.");if(c.firstChild){c.insertBefore(resetWarn,c.firstChild);}else{c.appendChild(resetWarn);}staleResultsResetNotice=false;}
+  uxAddStageGuide(c);
   collapseLongExplanations(c);
   saveState();
  }catch(err){
@@ -3906,15 +4040,7 @@ function renderAll(){
  var c3=el("input");c3.type="checkbox";c3.id="poz-tier-v";c3.checked=POZ.tierV;c3.disabled=tierFieldsLocked;c3.addEventListener("change",function(){if(tierFieldsLocked){return;}POZ.tierV=c3.checked;invalidateFromPotionTiersNow();});chk3.appendChild(c3);var c3l=elText("label",null,"Presenti Ingredienti di Classificazione XXXXX");c3l.htmlFor=c3.id;chk3.appendChild(c3l); 
  recipeFieldsHost.appendChild(chk3); 
 
- if(POZ.nome || POZ.pozionarioNome){
-  var nextCard=el("div","setup-next-card");
-  nextCard.appendChild(elText("div","setup-next-title","Cosa devi fare adesso"));
-  nextCard.appendChild(el("ol",null,
-   "<li><b>Conferma la Conoscenza della Pozione</b> qui sotto.</li>" +
-   "<li>Apri <b>Situazioni particolari</b> solo se usi una Valigetta speciale, un Laboratorio non registrato o stai creando una Pozione illegale.</li>" +
-   "<li>Quando è tutto corretto, passa a <b>Personaggio</b>.</li>"));
-  p.appendChild(nextCard);
- }
+
 
  var knowLine = el("div", "chk-line");
  var know=el("input");know.type="checkbox";know.id="poz-conoscenza";know.checked=!!POZ.conoscenzaPosseduta;
@@ -3932,12 +4058,17 @@ function renderAll(){
  var v80LawOverview=pozV80BuildRecipeLawBox(null);if(v80LawOverview){p.appendChild(v80LawOverview);}
  var v88InfoIngredientWarning=pozV88BuildInfoIngredientWarning();if(v88InfoIngredientWarning){p.appendChild(v88InfoIngredientWarning);}
 
- var specialDetails=el("details","conditional-options");
- var specialActive=!!(POZ.valigettaAdduco || usingIllegalValigetta() || POZ.laboratorioNonRegistrato || POZ.illegale);
- if(specialActive){specialDetails.open=true;specialDetails.className+=" has-active";}
- specialDetails.appendChild(elText("summary",null,specialActive?"Situazioni particolari — opzioni attive":"Situazioni particolari — apri solo se servono"));
- var specialBody=el("div","conditional-options-body");
- specialDetails.appendChild(specialBody);
+ var specialActiveList=[];
+ if(POZ.valigettaAdduco){specialActiveList.push('Adduco Maxima');}
+ else if(usingIllegalValigetta()){specialActiveList.push('Valigetta illegale');}
+ if(POZ.laboratorioNonRegistrato){specialActiveList.push('Laboratorio non registrato');}
+ if(POZ.illegale){specialActiveList.push('Pozione illegale');}
+ var specialActive=specialActiveList.length>0;
+ var specialBody=el('div','conditional-options-body');
+ var specialDetails=uxOptional('info-conditions','Condizioni speciali e legalità',
+   specialActive?'Attive: '+specialActiveList.join(' · '):'Valigetta speciale, Adduco Maxima, laboratorio non registrato o creazione illegale.',
+   specialBody,{active:specialActive,badge:specialActive?specialActiveList.length+' attiva/e':'Facoltativo'});
+ specialDetails.className+=' conditional-options';
  p.appendChild(specialDetails);
 
  var adducoLine = el("div", "chk-line");
@@ -3988,7 +4119,7 @@ function renderAll(){
  var nextBtn = el("button", "action primary", "Continua: Personaggio &#8594;"); 
  nextBtn.type="button";
  nextBtn.addEventListener(EV, function(){
-  if(["X","XX","XXX","XXXX","XXXXX"].indexOf(POZ.classificazione)===-1||(!POZ.tierBase&&!POZ.tierIV&&!POZ.tierV)){window.alert("Seleziona la Classificazione e almeno una fascia di Ingredienti prima di proseguire.");return;}if(!positiveInt(POZ.forzaStandard)){window.alert("Inserisci la Forza Standard della Pozione.");return;}if(!POZ.conoscenzaPosseduta){window.alert("Conferma che il creatore possiede la Conoscenza della Pozione.");return;}
+  if(["X","XX","XXX","XXXX","XXXXX"].indexOf(POZ.classificazione)===-1||(!POZ.tierBase&&!POZ.tierIV&&!POZ.tierV)){uxShowValidation(p,"Seleziona la Classificazione e almeno una fascia di Ingredienti prima di proseguire.");return;}if(!positiveInt(POZ.forzaStandard)){uxShowValidation(p,"Inserisci la Forza Standard della Pozione.");return;}if(!POZ.conoscenzaPosseduta){uxShowValidation(p,"Conferma che il creatore possiede la Conoscenza della Pozione.");return;}
   goPozioniStep("pg");
  }); 
  actions.appendChild(nextBtn);
@@ -4008,16 +4139,19 @@ function renderAll(){
  "Inserisci qui il Personaggio che prepara materialmente la Pozione. " + 
  "Gli eventuali altri PG non vengono aggiunti come co-creatori: potranno intervenire soltanto nella Preparazione degli Ingredienti, " + 
  "quando devono accorgersi di un errore e aiutare a rimediare. Per gli Studenti, <b>il voto della singola Pozione</b> è la base di Preparazione, Produzione e Imbottigliamento/Pulizia; Speziale I, Chimico I e Calderaio I lo migliorano soltanto nella propria fase. I voti delle singole Conoscenze che ne richiedono uno restano autonomi e non dipendono da una Media scolastica. Le Extra+ vengono scelte direttamente nella fase in cui possono essere utilizzate.")); 
- p.appendChild(el("div","rule-strip","<span><b>Preparazione</b> Voto Pozione + Speziale</span><span><b>Produzione</b> Voto Pozione + Chimico</span><span><b>Bacchetta</b> Tecnica + Tocco Magico</span><span><b>Imbottigliamento</b> Voto Pozione + Calderaio</span><span><b>Distillazione</b> regole proprie</span>")); 
+ p.appendChild(uxOptional('pg-phase-formulas','Come viene usato il profilo nelle fasi',
+ 'Preparazione: Voto + Speziale · Produzione: Voto + Chimico · Bacchetta: Tecnica + Tocco Magico · Imbottigliamento: Voto + Calderaio.',
+ el('div','rule-strip','<span><b>Preparazione</b> Voto Pozione + Speziale</span><span><b>Produzione</b> Voto Pozione + Chimico</span><span><b>Bacchetta</b> Tecnica + Tocco Magico</span><span><b>Imbottigliamento</b> Voto Pozione + Calderaio</span><span><b>Distillazione</b> regole proprie</span>'),
+ {badge:'Consultazione'})); 
 
  if(pgs.length === 0){ pgs.push(newPG()); } 
  if(pgs.length > 1){ pgs = [pgs[0]]; } 
  p.appendChild(buildPGCard(pgs[0])); 
 
  p.appendChild(el("div", "divider")); 
- var nextBtn = el("button", "action", "Vai a: Preparazione degli Ingredienti &#8594;"); 
+ var nextBtn = el("button", "action primary", "Continua: Ingredienti &#8594;"); 
  nextBtn.addEventListener(EV, function(){
-  var issue = setupIssue(); if(issue){ window.alert(issue); return; }
+  var issue = setupIssue(); if(issue){uxShowValidation(p,issue);return;}
   goPozioniStep("prep");
  }); 
  p.appendChild(nextBtn); 
@@ -4090,9 +4224,15 @@ function renderAll(){
   note:"Inserisci qui una sola volta tutti i bonus che aumentano la Tecnica del PG. Il tool li somma alla Tecnica base prima di applicare le tabelle e le formule di Preparazione, Produzione, Uso della Bacchetta, Imbottigliamento/Pulizia e conseguenze collegate. Non reinserirli nelle singole fasi.",
   onChange:function(){invalidateFromTechniqueNow(pg);aggiornaTecnicaEffettiva();}
  }));
- var tecEffBox=elText("div","guide-text",effectiveTechniqueLabel(pg));tecEffBox.id=tecEffId;card.appendChild(tecEffBox);
+ var tecEffBox=elText("div","ux-inline-status",effectiveTechniqueLabel(pg));tecEffBox.id=tecEffId;card.appendChild(tecEffBox);
 
- card.appendChild(buildTrackedEffectEditor(pg));
+ var usedTracked=trackedEffectEntries(pg);
+ var trackedLabels=[];for(var uxTi=0;uxTi<usedTracked.length;uxTi++){
+  var uxPreset=POZ_TRACKED_PRESETS[usedTracked[uxTi].preset];if(uxPreset){trackedLabels.push(uxPreset.source||uxPreset.label);}
+ }
+ card.appendChild(uxOptional('pg-bonuses-'+pg.id,'Oggetti e Conoscenze con bonus',
+   trackedLabels.length?'Inseriti: '+trackedLabels.join(' · '):'Manuali dell’Ars, talismani, Magi Biografia e Amuleto della Fortuna.',
+   buildTrackedEffectEditor(pg),{active:trackedLabels.length>0,badge:trackedLabels.length?trackedLabels.length+' inserito/i':'Facoltativo'}));
 
  var caldBox = el("div", "guide-text");
  var caldLabel = el("label", null, "Calderone / strumento utilizzato per la Pozione");
@@ -4162,7 +4302,12 @@ function renderAll(){
   });
   riskLine.appendChild(riskInp);caldBox.appendChild(riskLine);setTimeout(function(){attachCopy("cald-risk-copy-"+pg.id,riskCodeId);},0);
  }
- card.appendChild(caldBox);
+ var caldNow=calderoneInfo(pg);
+ var caldIsSpecial=caldNow.key!=='none';
+ var caldNeedsAction=caldIsSpecial&&((caldNow.uses!==null&&!positiveInt(pgDataGet(pg,'calderone_uses_before','')))||(caldNow.foldRisk&&!intInRange(pgDataGet(pg,'calderone_pieghevole_risk',''),1,2)));
+ card.appendChild(uxOptional('pg-calderone-'+pg.id,'Calderone e strumenti',
+  caldIsSpecial?caldNow.label+' · Verifica usi e condizioni': 'Se usi un calderone con bonus, selezionalo qui. Altrimenti non serve compilare nulla.',
+  caldBox,{active:caldIsSpecial,open:caldNeedsAction,badge:caldIsSpecial?(caldNeedsAction?'Da completare':'Selezionato'):'Facoltativo'}));
  
  var row2 = el("div", "row"); 
  if(pg.tipo === "studente"){
@@ -4219,7 +4364,9 @@ function renderAll(){
   mestiereLine.appendChild(mestiere);
   var mestiereLbl=elText("label",null,"Pozionista di mestiere — autorizza gli Ingredienti riservati ai Pozionisti; nelle Pozioni illegali usa inoltre 1d50 invece di 1d30 nei controlli PNG");
   mestiereLbl.htmlFor=mestiere.id;mestiereLine.appendChild(mestiereLbl);
-  card.appendChild(mestiereLine);
+  card.appendChild(uxOptional('pg-profession-'+pg.id,'Abilitazione professionale',
+    'Dichiara se il PG è Pozionista di mestiere: è rilevante per gli Ingredienti riservati e per i controlli delle Azioni Illegali.',
+    mestiereLine,{active:!!pg.pozionistaMestiere,badge:pg.pozionistaMestiere?'Dichiarata':'Da dichiarare se pertinente'}));
  }else{
   pg.pozionistaMestiere=false;
  }
@@ -4231,9 +4378,10 @@ function renderAll(){
 
  card.appendChild(el("div", "divider"));
  if(pg.tipo === "studente" || pg.tipo === "adulto"){
-   card.appendChild(el("div", "profile-section-title", "<span>Conoscenze Avanzate</span><small>seleziona soltanto quelle possedute</small>"));
+   var advHost=el('div');
+   advHost.appendChild(el('div','profile-section-title','<span>Conoscenze Avanzate</span><small>seleziona solo quelle possedute</small>'));
    if(pg.tipo === "studente"){
-    card.appendChild(el("p", "small-note", "Studente: può possedere soltanto il livello I della Sapienza. Perciò ciascuna Conoscenza Avanzata può essere assente oppure al livello I; non sono disponibili i livelli II-V."));
+    advHost.appendChild(el("p", "small-note", "Studente: può possedere soltanto il livello I della Sapienza. Perciò ciascuna Conoscenza Avanzata può essere assente oppure al livello I; non sono disponibili i livelli II-V."));
     if(POZ.classificazione==="XXXX"||POZ.classificazione==="XXXXX"){
      card.appendChild(el("div","guide-text","<b>Promemoria Studente:</b> a Hogwarts le Postazioni ordinarie sono destinate a Pozioni X-XXX. Produrre ONGame una Pozione "+POZ.classificazione+" a scuola viola il regolamento scolastico; se viene preparata altrove nei pressi di Hogwarts con Calderone/Kit personale, il regolamento richiede di avvisare il Narratore. Questo promemoria non blocca il calcolo."));
     }
@@ -4243,12 +4391,18 @@ function renderAll(){
    row3.appendChild(buildLevelSelect(pg, "speziale", "Speziale · Preparazione")); 
    row3.appendChild(buildLevelSelect(pg, "chimico", "Chimico · Produzione")); 
    row3.appendChild(buildLevelSelect(pg, "toccoMagico", "Tocco Magico · Bacchetta")); 
-   card.appendChild(row3); 
+   advHost.appendChild(row3); 
   
    var row4 = el("div", "row advanced-grid"); 
    row4.appendChild(buildLevelSelect(pg, "calderaio", "Calderaio · Imbottigliamento")); 
    row4.appendChild(buildLevelSelect(pg, "distillatore", "Distillatore · Distillazione")); 
-   card.appendChild(row4); 
+   advHost.appendChild(row4);
+   var advKeys=[['speziale','Speziale'],['chimico','Chimico'],['toccoMagico','Tocco Magico'],['calderaio','Calderaio'],['distillatore','Distillatore']];
+   var advChosen=[];
+   for(var ak=0;ak<advKeys.length;ak++){var lv=String(pg[advKeys[ak][0]]||'0');if(lv!=='0'){advChosen.push(advKeys[ak][1]+' '+lv);}}
+   card.appendChild(uxOptional('pg-advanced-'+pg.id,'Conoscenze Avanzate',
+      advChosen.length?'Possedute: '+advChosen.join(' · '):'Speziale, Chimico, Tocco Magico, Calderaio e Distillatore.',
+      advHost,{active:advChosen.length>0,badge:advChosen.length?advChosen.length+' posseduta/e':'Facoltativo'}));
  }else{
   card.appendChild(el("div","guide-text","Seleziona prima Studente o Adulto: compariranno qui soltanto i campi e le Conoscenze Avanzate pertinenti al tipo di Personaggio."));
  }
@@ -4355,10 +4509,12 @@ function renderAll(){
  }
 
  function buildPhaseExtraControl(pg, field, nome){
- var wrap = el("div", "phase-extra-control");
- wrap.appendChild(el("div", "phase-extra-title", "Conoscenza Extra — " + nome));
- wrap.appendChild(buildExtraSelect(pg, field, "Utilizzo in questa fase"));
- return wrap;
+ var wrap=el('div','phase-extra-control');
+ wrap.appendChild(buildExtraSelect(pg,field,'Utilizzo in questa fase'));
+ var active=extraIsUsed(pg,field);
+ var hint={manualita:'Aumenta le possibilità dei d14; costa Fatica aggiuntiva.',memoria:'Aumenta le possibilità del d30; costa Fatica aggiuntiva.',sintesi:'Riduce i post finali; costa Fatica aggiuntiva.'}[field]||'Bonus della fase da attivare se posseduto.';
+ return uxOptional('extra-'+field+'-'+pg.id,nome+' · Extra+',hint,wrap,
+  {active:active,badge:active?'In uso':'Non attivata'});
  }
 
  function buildExtraSelect(pg, field, label){
@@ -4755,7 +4911,7 @@ function renderAll(){
  if(pgs.length > 0){ p.appendChild(buildFaticaBox(pgs[0], "prep")); }
 
  p.appendChild(el("div", "divider")); 
- var nextBtn = el("button", "action", "Vai a: Produzione &#8594;"); 
+ var nextBtn = el("button", "action primary", "Continua: Produzione &#8594;"); 
  nextBtn.addEventListener(EV, function(){ goPozioniStep("prod"); }); 
  p.appendChild(nextBtn); 
 
@@ -5369,7 +5525,7 @@ function renderAll(){
  if(pgs.length > 0){ p.appendChild(buildFaticaBox(pgs[0], "prod")); }
 
  p.appendChild(el("div", "divider")); 
- var nextBtn = el("button", "action", "Vai a: Uso della Bacchetta &#8594;"); if(POZ.illegale&&!pozV89CreationGatePhaseReady("prod")){nextBtn.disabled=true;nextBtn.title="Risolvi prima il controllo dell’Azione Illegale della Produzione.";} 
+ var nextBtn = el("button", "action primary", "Continua: Bacchetta &#8594;"); if(POZ.illegale&&!pozV89CreationGatePhaseReady("prod")){nextBtn.disabled=true;nextBtn.title="Risolvi prima il controllo dell’Azione Illegale della Produzione.";} 
  nextBtn.addEventListener(EV, function(){ if(nextBtn.disabled)return; goPozioniStep("bacchetta"); }); 
  p.appendChild(nextBtn); 
 
@@ -5612,7 +5768,7 @@ function renderAll(){
  if(pgs.length > 0){ p.appendChild(buildFaticaBox(pgs[0], "bacchetta")); }
 
  p.appendChild(el("div", "divider")); 
- var nextBtn = el("button", "action", "Vai a: Imbottigliamento e Pulizia del Calderone &#8594;"); if(POZ.illegale&&!pozV89CreationGatePhaseReady("bacchetta")){nextBtn.disabled=true;nextBtn.title="Risolvi prima il controllo dell’Azione Illegale dell’Uso della Bacchetta.";} 
+ var nextBtn = el("button", "action primary", "Continua: Imbottigliamento &#8594;"); if(POZ.illegale&&!pozV89CreationGatePhaseReady("bacchetta")){nextBtn.disabled=true;nextBtn.title="Risolvi prima il controllo dell’Azione Illegale dell’Uso della Bacchetta.";} 
  nextBtn.addEventListener(EV, function(){ if(nextBtn.disabled)return; goPozioniStep("imbott"); }); 
  p.appendChild(nextBtn); 
 
@@ -6135,7 +6291,7 @@ function renderImbottStep(container){
  if(pgs.length > 0){ p.appendChild(buildFaticaBox(pgs[0], "imbott")); }
 
  p.appendChild(el("div", "divider")); 
- var nextBtn = el("button", "action", "Vai a: Distillazione (facoltativa) &#8594;"); 
+ var nextBtn = el("button", "action primary", "Continua: Distillazione facoltativa &#8594;"); 
  nextBtn.addEventListener(EV, function(){ goPozioniStep("distill"); }); 
  p.appendChild(nextBtn); 
 
@@ -6627,7 +6783,7 @@ function renderImbottStep(container){
  if(pgs.length > 0){ p.appendChild(buildFaticaBox(pgs[0], "distill")); }
 
  p.appendChild(el("div", "divider"));
- var nextBtn = el("button", "action", "Vai a: Riepilogo Finale &#8594;");
+ var nextBtn = el("button", "action primary", "Vai al Riepilogo Finale &#8594;");
  nextBtn.addEventListener(EV, function(){ goPozioniStep("riepilogo"); });
  p.appendChild(nextBtn);
 
@@ -8072,6 +8228,82 @@ init();
 #creazione-pozione .poz-v85-summary-identity .poz-v85-classification{margin-left:10px;vertical-align:middle}
 #creazione-pozione .poz-v85-inline-rule{display:inline-flex;margin-left:6px;padding:2px 7px;border:1px solid #80608a;border-radius:999px;background:#482252;color:#fff!important;font-size:.72em;font-weight:800;text-decoration:none;vertical-align:middle}
 @media(max-width:620px){#creazione-pozione .poz-v85-classification{margin-left:0}#creazione-pozione .poz-v85-identity{align-items:flex-start}#pozV85PersistentLinks{gap:5px;padding:8px}#pozV85PersistentLinks.is-stuck{top:0;width:calc(100vw - 16px)}#pozV85PersistentLinks .poz-v85-rule-link{padding:3px 7px;font-size:.92em}}
+
+
+/* ========================================================
+   v95 — un percorso dominante, tutto il resto su richiesta
+   Il regolamento generale rimane sticky come richiesto.
+   ======================================================== */
+#creazione-pozione .wrap{max-width:1040px !important;}
+#creazione-pozione .main-title{font-size:33px !important;}
+#creazione-pozione .steps-nav{gap:5px !important;margin-bottom:10px !important;}
+#creazione-pozione button.step-btn{min-height:52px !important;padding:8px 10px !important;border-color:#414947 !important;}
+#creazione-pozione .step-index{letter-spacing:.03em !important;font-size:9px !important;opacity:.78 !important;}
+#creazione-pozione .step-label{font-size:13px !important;}
+#creazione-pozione .panel{padding:22px 24px 25px !important;background:#252a2a !important;}
+#creazione-pozione .panel h2{font-size:26px !important;margin-bottom:10px !important;}
+#creazione-pozione .ux-stage-overline{font-size:10px !important;margin-bottom:6px !important;}
+#creazione-pozione .ux-task-strip{background:#283125 !important;border-color:#607340 !important;margin:10px 0 14px !important;padding:10px 12px !important;}
+#creazione-pozione .ux-task-strip strong{font-size:14.5px !important;}
+#creazione-pozione .ux-task-strip .ux-task-icon{flex-basis:22px !important;width:22px !important;height:22px !important;}
+#creazione-pozione .info-selector-card{background:rgba(15,20,20,.46) !important;box-shadow:none !important;border-color:#627644 !important;}
+#creazione-pozione .selected-potion-card{background:#29252f !important;box-shadow:none !important;}
+#creazione-pozione details.ux-optional{background:#202525 !important;border-color:#46514c !important;margin:8px 0 10px !important;box-shadow:none !important;}
+#creazione-pozione details.ux-optional>summary{padding:11px 34px 11px 12px !important;background:#232929 !important;}
+#creazione-pozione details.ux-optional>summary:hover{background:#313a35 !important;border-radius:7px !important;}
+#creazione-pozione details.ux-optional.has-active>summary{background:#293423 !important;}
+#creazione-pozione details.ux-optional .ux-opt-title{font:650 14px/1.3 var(--serif) !important;}
+#creazione-pozione details.ux-optional .ux-opt-hint{font:400 12px/1.35 var(--serif) !important;color:#bfc8bc !important;}
+#creazione-pozione details.ux-optional .ux-opt-badge{font:600 10px/1.2 var(--mono) !important;background:#303a32 !important;border-color:#46594a !important;color:#d0ddc7 !important;}
+#creazione-pozione details.ux-optional .ux-optional-body{padding:10px 12px 13px !important;}
+#creazione-pozione .poz-v85-phase-rules{margin:0 0 12px !important;border:1px solid #424d49 !important;}
+#creazione-pozione .poz-v85-phase-rules>summary{background:#212727 !important;}
+#creazione-pozione .poz-v85-phase-rules>.poz-v85-rule-links{border:none !important;border-top:1px solid #41504a !important;margin:0 !important;padding:12px 13px !important;background:#202526 !important;color:#e4e6dc !important;}
+#creazione-pozione .poz-v85-phase-rules .poz-v85-rule-links>strong{color:#d9e69e !important;}
+#creazione-pozione .poz-v85-link-details{margin:0 0 11px !important;background:#232929 !important;border:1px solid #46514c !important;}
+#creazione-pozione .poz-v85-link-details>summary{padding:9px 12px !important;color:#cbd5bd !important;font-weight:600 !important;font-size:12px !important;}
+#creazione-pozione .poz-v85-link-details[open]>.poz-v85-rule-links{background:#24292a !important;}
+#creazione-pozione .rule-strip{margin:0 !important;gap:6px !important;}
+#creazione-pozione .rule-strip span{padding:8px !important;font-size:11.5px !important;text-align:left !important;}
+#creazione-pozione .pg-card{padding:15px 16px !important;background:#232829 !important;}
+#creazione-pozione .pg-card h3{font-size:19px !important;margin-bottom:12px !important;}
+#creazione-pozione .pg-card .row{gap:13px !important;}
+#creazione-pozione .pg-card .row input:not([type=checkbox]),#creazione-pozione .pg-card .row select{background:#111716 !important;border-color:#607266 !important;}
+#creazione-pozione .pg-card .row input:not([type=checkbox]):focus,#creazione-pozione .pg-card .row select:focus{border-color:#c1da7f !important;box-shadow:0 0 0 3px rgba(159,190,40,.13) !important;}
+#creazione-pozione .pg-card>.divider{margin:13px 0 9px !important;background:#39433f !important;}
+#creazione-pozione .pg-card .result-line:has(.dice-code){padding:10px 12px !important;margin:10px 0 5px !important;border:1px solid #3d4a41 !important;border-radius:8px !important;background:#1c2421 !important;}
+#creazione-pozione .pg-card .result-line:has(.dice-code) .dice-code{flex:1 1 360px !important;max-height:110px !important;overflow:auto !important;background:#171d1b !important;border:1px solid #34433b !important;color:#a7b9a3 !important;font-size:11px !important;line-height:1.35 !important;}
+#creazione-pozione .pg-card .result-line:has(.dice-code) button.copy-btn{min-width:100px !important;min-height:46px !important;background:#526c30 !important;border-color:#b1ca69 !important;color:#fff !important;font-size:13px !important;font-weight:750 !important;}
+#creazione-pozione .pg-card .result-line:has(input[type=number]) input[type=number]{outline:0 !important;box-shadow:0 0 0 1px rgba(171,202,107,.16) !important;}
+#creazione-pozione .pg-card .result-line:has(input[type=number])>span:first-child{color:#e2ead2 !important;font-size:14px !important;font-weight:600 !important;}
+#creazione-pozione .pg-card .result-line:has(input[type=number]):not(:has(.dice-code)){background:#263127 !important;border-radius:8px !important;border-left:3px solid #a1ba60 !important;padding:10px 12px !important;}
+#creazione-pozione .chk-line:has(#poz-conoscenza){border-left:3px solid #a6c657 !important;padding:11px 12px !important;background:#2e3a29 !important;border-radius:6px !important;}
+#creazione-pozione .chk-line:has(#poz-conoscenza) label{font-size:14px !important;color:#f1f5e1 !important;}
+#creazione-pozione .poz-v85-technique-inner{padding:0 12px 12px !important;color:#dce5d1 !important;font-size:12px !important;}
+#creazione-pozione .poz-v85-technique-inner .poz-v85-rule-links{margin:6px 0 0 !important;}
+#creazione-pozione .panel>button.action.primary{display:flex !important;width:max-content !important;max-width:100% !important;margin:17px 0 0 auto !important;min-width:210px !important;min-height:49px !important;background:#536c2b !important;border:1px solid #bcda69 !important;box-shadow:0 4px 10px rgba(0,0,0,.16) !important;}
+#creazione-pozione .panel>button.action.primary:hover{background:#68843c !important;}
+#creazione-pozione .panel>.divider{margin:18px 0 0 !important;opacity:.56 !important;}
+#creazione-pozione .panel>.small-note{font-size:12px !important;line-height:1.45 !important;color:#a9b5aa !important;}
+#creazione-pozione .poz-session-workspace-top{padding:8px 10px !important;}
+#creazione-pozione #poz-session-delete-current{background:transparent !important;border-color:#6b5155 !important;color:#d4a9ae !important;box-shadow:none !important;font-size:12px !important;}
+#creazione-pozione #poz-session-delete-current:hover{background:#3a2027 !important;}
+#pozV85PersistentSlot{margin:5px 0 12px !important;}
+#pozV85PersistentLinks{gap:4px !important;padding:5px 9px !important;box-shadow:none !important;border-color:#596b45 !important;background:#23262a !important;}
+#pozV85PersistentLinks .poz-v85-rule-link{padding:2px 8px !important;background:#352a3b !important;border-color:#594962 !important;color:#ded8e1 !important;font-size:11px !important;font-weight:500 !important;}
+#pozV85PersistentLinks>strong{font-size:11px !important;font-weight:600 !important;color:#ccd8ab !important;}
+#pozV85PersistentLinks.is-stuck{box-shadow:0 6px 14px rgba(0,0,0,.20) !important;background:#252a29 !important;}
+@media(max-width:650px){
+ #creazione-pozione .wrap{padding:16px 12px 50px !important;}
+ #creazione-pozione .steps-nav{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
+ #creazione-pozione button.step-btn{min-height:43px !important;}
+ #creazione-pozione .panel{padding:16px 13px 23px !important;}
+ #creazione-pozione .panel h2{font-size:23px !important;}
+ #creazione-pozione .panel>button.action.primary{width:100% !important;}
+ #creazione-pozione .pg-card .result-line:has(.dice-code) button.copy-btn{flex:1 1 100% !important;}
+ #pozV85PersistentLinks .poz-v85-rule-link{font-size:10px !important;}
+}
+
 </style>
 <script id="pozioni-v85-links-identity">
 (function(){
@@ -8106,15 +8338,15 @@ function url(anchor){return BASE+anchor;}
 function htmlLink(label,anchor){return '<a class="poz-v85-rule-link" href="'+url(anchor)+'" target="_blank" rel="noopener">'+htmlEscape(label)+'</a>';}
 function bbLink(label,anchor){return '[url='+url(anchor)+']'+bbSafe(label)+'[/url]';}
 function identity(){try{return typeof window.__pozV85Identity==='function'?window.__pozV85Identity():{name:'',cls:'',anchor:'pozionario'};}catch(e){return {name:'',cls:'',anchor:'pozionario'};}}
-function activeStep(){var b=document.querySelector('#stepsNav .step-btn.active'),t=(b&&b.textContent||'').trim(),m=t.match(/^(\d+)/);return {1:'info',2:'pg',3:'prep',4:'prod',5:'bacchetta',6:'imbott',7:'distill',8:'riepilogo'}[m?m[1]:'']||'info';}
+function activeStep(){var b=document.querySelector('#stepsNav .step-btn.active');if(!b)return 'info';var key=b.getAttribute('data-step-key');if(key)return key;var m=(b.textContent||'').trim().match(/^(\d+)/);return {1:'info',2:'pg',3:'prep',4:'prod',5:'bacchetta',6:'imbott',7:'distill',8:'riepilogo'}[m?Number(m[1]):0]||'info';}
 function linkPlainBB(text,seen){var out=String(text==null?'':text),placeholders=[];out=out.replace(/\[url=[^\]]+\][\s\S]*?\[\/url\]|\[dice=[^\]]+\][\s\S]*?\[\/dice\]/gi,function(x){var token='\u0000'+placeholders.length+'\u0000';placeholders.push(x);return token;});var byTerm={};RULE_TERMS.forEach(function(pair){byTerm[norm(pair[0])]=pair[1];});var alternatives=RULE_TERMS.map(function(pair){return pair[0];}).sort(function(a,b){return b.length-a.length;}).map(function(term){return term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');});out=out.replace(new RegExp(alternatives.join('|'),'gi'),function(m){var anchor=byTerm[norm(m)];if(!anchor||seen[anchor])return m;seen[anchor]=1;return bbLink(m,anchor);});return out.replace(/\u0000(\d+)\u0000/g,function(_,i){return placeholders[Number(i)];});}
 window.pozV85LinkBBText=function(text){var seen={},parts=String(text==null?'':text).split(/(\[url=[^\]]+\][\s\S]*?\[\/url\]|\[dice=[^\]]+\][\s\S]*?\[\/dice\])/gi);return parts.map(function(part){return /^\[(?:url|dice)=/i.test(part)?part:linkPlainBB(part,seen);}).join('');};
 function ensurePersistentRuleBar(){if(el('pozV85PersistentLinks'))return;var nav=el('stepsNav');if(!nav)return;var slot=document.createElement('div');slot.id='pozV85PersistentSlot';var bar=document.createElement('div');bar.id='pozV85PersistentLinks';bar.className='poz-v85-rule-links';bar.innerHTML='<strong>Regolamento:</strong> '+GLOBAL_LINKS.map(function(x){return htmlLink(x[0],x[1]);}).join(' ');slot.appendChild(bar);nav.insertAdjacentElement('afterend',slot);syncPersistentRuleSpace();syncPersistentRuleState();if(window.ResizeObserver){var ro=new ResizeObserver(syncPersistentRuleSpace);ro.observe(bar);}}
 function syncPersistentRuleSpace(){var slot=el('pozV85PersistentSlot'),bar=el('pozV85PersistentLinks');if(slot&&bar)slot.style.height=(Math.ceil(bar.getBoundingClientRect().height)+12)+'px';}
 function syncPersistentRuleState(){var slot=el('pozV85PersistentSlot'),bar=el('pozV85PersistentLinks');if(!slot||!bar)return;bar.classList.toggle('is-stuck',slot.getBoundingClientRect().top<=0);}
 var scrollQueued=false;function schedulePersistentRuleState(){if(scrollQueued)return;scrollQueued=true;var run=function(){scrollQueued=false;syncPersistentRuleState();};if(window.requestAnimationFrame)window.requestAnimationFrame(run);else window.setTimeout(run,0);}
-function ensurePhaseStrip(){var panel=document.querySelector('#stepContainer > .panel'),key=activeStep(),links=PHASE_RULES[key]||[];if(!panel||!links.length||panel.querySelector(':scope > .poz-v85-rule-links'))return;var strip=document.createElement('div');strip.className='poz-v85-rule-links';strip.innerHTML='<strong>Regolamento:</strong> '+links.map(function(x){return htmlLink(x[0],x[1]);}).join(' ');var h=panel.querySelector(':scope > h2');if(h)h.insertAdjacentElement('afterend',strip);else panel.insertBefore(strip,panel.firstChild);}
-function ensureTechniqueIndex(){if(activeStep()!=='pg')return;var panel=document.querySelector('#stepContainer > .panel');if(!panel||el('pozV85TechniqueLinks'))return;var d=document.createElement('details');d.id='pozV85TechniqueLinks';d.className='poz-v85-link-details';d.innerHTML='<summary>Conoscenze e Tecniche collegate</summary><div class="poz-v85-rule-links"><strong>Apri la regola:</strong> '+TECHNIQUE_LINKS.map(function(x){return htmlLink(x[0],x[1]);}).join(' ')+'</div>';var strip=panel.querySelector(':scope > .poz-v85-rule-links');if(strip)strip.insertAdjacentElement('afterend',d);else{var h=panel.querySelector(':scope > h2');if(h)h.insertAdjacentElement('afterend',d);else panel.insertBefore(d,panel.firstChild);}}
+function ensurePhaseStrip(){var panel=document.querySelector('#stepContainer > .panel'),key=activeStep(),links=PHASE_RULES[key]||[];if(!panel||!links.length||panel.querySelector(':scope > .poz-v85-phase-rules'))return;var strip=document.createElement('details');strip.className='poz-v85-phase-rules ux-optional compact-explainer';var keyFold='phase-links-'+key;strip.setAttribute('data-ux-key',keyFold);strip.open=typeof window.__pozUxGetFold==='function'&&window.__pozUxGetFold(keyFold);strip.addEventListener('toggle',function(){if(window.__pozUxSetFold)window.__pozUxSetFold(keyFold,strip.open);});var summ=document.createElement('summary');var names=links.slice(0,3).map(function(x){return htmlEscape(x[0]);}).join(' · ');summ.innerHTML='<span class="ux-opt-copy"><span class="ux-opt-title">Link al regolamento della fase</span><span class="ux-opt-hint">'+names+(links.length>3?' · altre sezioni':'')+'</span></span><span class="ux-opt-badge">Consulta</span>';strip.appendChild(summ);var body=document.createElement('div');body.className='poz-v85-rule-links';body.innerHTML='<strong>Apri la sezione:</strong> '+links.map(function(x){return htmlLink(x[0],x[1]);}).join(' ');if(key==='pg'){var tech=document.createElement('div');tech.className='poz-v85-technique-inner';tech.innerHTML='<strong>Conoscenze e Tecniche:</strong><div class="poz-v85-rule-links">'+TECHNIQUE_LINKS.map(function(x){return htmlLink(x[0],x[1]);}).join(' ')+'</div>';strip.appendChild(tech);}strip.appendChild(body);var guide=panel.querySelector(':scope > .ux-task-strip');if(guide)guide.insertAdjacentElement('afterend',strip);else{var h=panel.querySelector(':scope > h2');if(h)h.insertAdjacentElement('afterend',strip);else panel.insertBefore(strip,panel.firstChild);}}
+function ensureTechniqueIndex(){if(activeStep()!=='pg')return;var panel=document.querySelector('#stepContainer > .panel');if(!panel||el('pozV85TechniqueLinks'))return;var d=document.createElement('details');d.id='pozV85TechniqueLinks';d.className='poz-v85-link-details';d.innerHTML='<summary>Conoscenze e Tecniche collegate</summary><div class="poz-v85-rule-links"><strong>Apri la regola:</strong> '+TECHNIQUE_LINKS.map(function(x){return htmlLink(x[0],x[1]);}).join(' ')+'</div>';var strip=panel.querySelector(':scope > .poz-v85-phase-rules');if(strip)strip.insertAdjacentElement('afterend',d);else{var h=panel.querySelector(':scope > .ux-task-strip')||panel.querySelector(':scope > h2');if(h)h.insertAdjacentElement('afterend',d);else panel.insertBefore(d,panel.firstChild);}}
 function makeIdentity(data){var bar=document.createElement('div');bar.className='poz-v85-identity';var k=document.createElement('span');k.className='poz-v85-identity-kind';k.textContent='Pozione';bar.appendChild(k);var n=document.createElement('strong');n.className='poz-v85-identity-name';n.innerHTML='<a href="'+url(data.anchor||'pozionario')+'" target="_blank" rel="noopener">'+htmlEscape(data.name)+'</a>';bar.appendChild(n);var c=document.createElement('span');c.className='poz-v85-classification';c.innerHTML='Classificazione: <a href="'+url('classificazione')+'" target="_blank" rel="noopener">'+htmlEscape(data.cls)+'</a>';bar.appendChild(c);bar.dataset.sig=data.name+'|'+data.cls+'|'+data.anchor;return bar;}
 function ensureIdentity(){var panel=document.querySelector('#stepContainer > .panel'),data=identity();if(!panel)return;var old=panel.querySelector(':scope > .poz-v85-identity');if(!data.name||!data.cls){if(old)old.remove();return;}var sig=data.name+'|'+data.cls+'|'+data.anchor;if(old&&old.dataset.sig===sig)return;var bar=makeIdentity(data);if(old)old.replaceWith(bar);else{var h=panel.querySelector(':scope > h2');if(h)h.insertAdjacentElement('afterend',bar);else panel.insertBefore(bar,panel.firstChild);}}
 function contextHeader(data){return '<b>POZIONE: '+bbLink(data.name,data.anchor||'pozionario')+' · CLASSIFICAZIONE: '+bbLink(data.cls,'classificazione')+'</b>\n';}
@@ -8129,7 +8361,7 @@ function syncCode(code){var text=code.textContent||'',data=identity();
 function syncCodes(){document.querySelectorAll('#creazione-pozione .dice-code').forEach(syncCode);}
 function enhanceTechniqueLabels(){var pairs=TECHNIQUE_LINKS.map(function(x){return {name:x[0],anchor:x[1]};});document.querySelectorAll('#stepContainer label,#stepContainer h3').forEach(function(node){if(node.querySelector('.poz-v85-inline-rule'))return;var t=(node.textContent||'').trim().toLocaleLowerCase('it-IT');for(var i=0;i<pairs.length;i++){var n=pairs[i].name.toLocaleLowerCase('it-IT').replace(/\+$/,'').trim();if(t.indexOf(n)!==0)continue;var a=document.createElement('a');a.className='poz-v85-inline-rule';a.href=url(pairs[i].anchor);a.target='_blank';a.rel='noopener';a.textContent='Regola ↗';node.appendChild(a);break;}});}
 function enhanceSummaryIdentity(){if(activeStep()!=='riepilogo')return;var data=identity();if(!data.name||!data.cls)return;document.querySelectorAll('#stepContainer .panel p').forEach(function(p){var t=(p.textContent||'').trim();if(!/^Pozione\s*:/i.test(t)||p.classList.contains('poz-v85-summary-identity'))return;p.classList.add('poz-v85-summary-identity');p.innerHTML='Pozione: <a href="'+url(data.anchor||'pozionario')+'" target="_blank" rel="noopener">'+htmlEscape(data.name)+'</a> <span class="poz-v85-classification">Classificazione: <a href="'+url('classificazione')+'" target="_blank" rel="noopener">'+htmlEscape(data.cls)+'</a></span>';});}
-function sync(){ensurePersistentRuleBar();ensurePhaseStrip();ensureTechniqueIndex();ensureIdentity();enhanceTechniqueLabels();enhanceSummaryIdentity();syncCodes();}
+function sync(){ensurePersistentRuleBar();ensurePhaseStrip();ensureIdentity();enhanceTechniqueLabels();enhanceSummaryIdentity();syncCodes();}
 var queued=false;function schedule(){if(queued)return;queued=true;var run=function(){queued=false;sync();};if(window.requestAnimationFrame)window.requestAnimationFrame(run);else window.setTimeout(run,0);}
 document.addEventListener('change',schedule,true);document.addEventListener('input',schedule,true);window.addEventListener('scroll',schedulePersistentRuleState,{passive:true});window.addEventListener('resize',function(){syncPersistentRuleSpace();syncPersistentRuleState();schedule();});
 var observer=new MutationObserver(schedule);observer.observe(el('creazione-pozione'),{subtree:true,childList:true,characterData:true});window.addEventListener('load',schedule);schedule();
