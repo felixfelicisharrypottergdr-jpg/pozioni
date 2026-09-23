@@ -1,3 +1,4 @@
+<!-- Pozioni tool v93 — revisione UX/UI: pagina iniziale guidata, disclosure progressiva, copia senza salto pagina, malus Preparazione nella frase Inventario, conseguenze finali gerarchizzate; nessuna nuova lettura Firebase. -->
 <!-- Pozioni tool v92 — tabella ufficiale dei post inserita in un details contestuale nella fase Imbottigliamento/Pulizia; solo riferimento visivo, nessuna modifica ai calcoli. -->
 <!-- Pozioni tool v91 — terzo audit Azioni Illegali: anche la dichiarazione di illegalità delle Pozioni inserite manualmente viene fissata dopo l’avvio del primo controllo, impedendo di disattivarla tornando alla schermata iniziale. -->
 <!-- Pozioni tool v90 — audit Azioni Illegali: il dado 1d30/1d50 viene fotografato all’avvio del singolo controllo; le protezioni possono essere aggiornate tra Produzione e Bacchetta senza alterare il tiro già concluso. -->
@@ -1410,7 +1411,302 @@
   line-height:1.55 !important;
 }
 #creazione-pozione .compact-explainer-body > :first-child{margin-top:0 !important;}
+
 #creazione-pozione .compact-explainer-body > :last-child{margin-bottom:0 !important;}
+
+/* ==========================================================
+   v93 — UX/UI: gerarchie visive, disclosure progressiva
+   ========================================================== */
+#creazione-pozione .panel > p{
+  margin:10px 0 !important;
+}
+#creazione-pozione .panel > .divider{
+  margin:22px 0 18px !important;
+}
+#creazione-pozione .info-selector-card{
+  margin:0 0 14px !important;
+  padding:17px 18px !important;
+  background:linear-gradient(135deg,rgba(159,190,40,.09),rgba(53,22,63,.22)),rgba(16,18,19,.72) !important;
+  border:1px solid rgba(159,190,40,.45) !important;
+  border-radius:11px !important;
+}
+#creazione-pozione .info-selector-card label{
+  margin-bottom:8px !important;
+  font-size:14px !important;
+}
+#creazione-pozione .selected-potion-card{
+  margin:12px 0 18px !important;
+  padding:16px 18px !important;
+  background:rgba(16,18,19,.58) !important;
+  border:1px solid var(--line) !important;
+  border-left:4px solid var(--acid) !important;
+  border-radius:10px !important;
+}
+#creazione-pozione .selected-potion-title{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:12px !important;
+  margin-bottom:12px !important;
+}
+#creazione-pozione .selected-potion-title strong{
+  color:var(--acid-soft) !important;
+  font-family:'magic',var(--serif) !important;
+  font-size:21px !important;
+  font-weight:400 !important;
+}
+#creazione-pozione .selected-potion-badge{
+  flex:0 0 auto !important;
+  padding:4px 9px !important;
+  border:1px solid rgba(159,190,40,.48) !important;
+  border-radius:999px !important;
+  color:var(--acid-soft) !important;
+  font-family:var(--mono) !important;
+  font-size:10.5px !important;
+  line-height:1.2 !important;
+}
+#creazione-pozione .selected-potion-grid{
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:9px !important;
+}
+#creazione-pozione .selected-potion-stat{
+  min-width:0 !important;
+  padding:10px 11px !important;
+  background:rgba(255,255,255,.025) !important;
+  border:1px solid rgba(80,89,87,.62) !important;
+  border-radius:8px !important;
+}
+#creazione-pozione .selected-potion-stat small{
+  display:block !important;
+  margin-bottom:3px !important;
+  color:var(--text-dim) !important;
+  font-size:10.5px !important;
+  text-transform:uppercase !important;
+  letter-spacing:.035em !important;
+}
+#creazione-pozione .selected-potion-stat span{
+  display:block !important;
+  color:var(--text) !important;
+  font-size:14px !important;
+  line-height:1.35 !important;
+  overflow-wrap:anywhere !important;
+}
+#creazione-pozione .setup-next-card{
+  margin:16px 0 !important;
+  padding:14px 16px !important;
+  background:linear-gradient(90deg,rgba(53,22,63,.42),rgba(16,18,19,.58)) !important;
+  border:1px solid rgba(184,156,193,.30) !important;
+  border-left:4px solid var(--purple-soft) !important;
+  border-radius:9px !important;
+}
+#creazione-pozione .setup-next-card .setup-next-title{
+  margin:0 0 8px !important;
+  color:var(--acid-soft) !important;
+  font-size:15px !important;
+  font-weight:700 !important;
+}
+#creazione-pozione .setup-next-card ol{
+  margin:0 !important;
+  padding-left:20px !important;
+  color:var(--text-soft) !important;
+}
+#creazione-pozione .setup-next-card li{
+  margin:4px 0 !important;
+  line-height:1.45 !important;
+}
+#creazione-pozione details.setup-details,
+#creazione-pozione details.conditional-options,
+#creazione-pozione details.consequence-details{
+  margin:12px 0 16px !important;
+  border:1px solid rgba(80,89,87,.72) !important;
+  border-radius:9px !important;
+  overflow:hidden !important;
+  background:rgba(16,18,19,.36) !important;
+}
+#creazione-pozione details.setup-details > summary,
+#creazione-pozione details.conditional-options > summary,
+#creazione-pozione details.consequence-details > summary{
+  cursor:pointer !important;
+  list-style:none !important;
+  padding:12px 14px !important;
+  background:linear-gradient(180deg,rgba(53,22,63,.38),rgba(27,31,32,.78)) !important;
+  color:var(--acid-soft) !important;
+  font-size:14px !important;
+  font-weight:700 !important;
+  line-height:1.4 !important;
+  user-select:none !important;
+}
+#creazione-pozione details.setup-details > summary::-webkit-details-marker,
+#creazione-pozione details.conditional-options > summary::-webkit-details-marker,
+#creazione-pozione details.consequence-details > summary::-webkit-details-marker{
+  display:none !important;
+}
+#creazione-pozione details.setup-details > summary:after,
+#creazione-pozione details.conditional-options > summary:after,
+#creazione-pozione details.consequence-details > summary:after{
+  content:"+" !important;
+  float:right !important;
+  margin-left:10px !important;
+  font-family:var(--mono) !important;
+}
+#creazione-pozione details.setup-details[open] > summary:after,
+#creazione-pozione details.conditional-options[open] > summary:after,
+#creazione-pozione details.consequence-details[open] > summary:after{
+  content:"−" !important;
+}
+#creazione-pozione .setup-details-body,
+#creazione-pozione .conditional-options-body,
+#creazione-pozione .consequence-details-body{
+  padding:14px !important;
+}
+#creazione-pozione details.conditional-options.has-active{
+  border-color:rgba(201,104,124,.58) !important;
+}
+#creazione-pozione details.conditional-options.has-active > summary{
+  color:#ffd0da !important;
+}
+#creazione-pozione .conditional-options-body .chk-line{
+  margin:7px 0 !important;
+  padding:9px 10px !important;
+  background:rgba(255,255,255,.025) !important;
+  border:1px solid rgba(80,89,87,.48) !important;
+  border-radius:7px !important;
+}
+#creazione-pozione .step-actions{
+  display:flex !important;
+  flex-wrap:wrap !important;
+  align-items:center !important;
+  gap:10px !important;
+  margin-top:18px !important;
+}
+#creazione-pozione .step-actions button.action{
+  margin:0 !important;
+}
+#creazione-pozione button.action.primary{
+  background:linear-gradient(180deg,#667d1f,#4c6115) !important;
+  border-color:#abc44a !important;
+  color:#f7fbe9 !important;
+  font-weight:700 !important;
+  box-shadow:0 5px 14px rgba(0,0,0,.20) !important;
+}
+#creazione-pozione button.action.primary:hover{
+  background:linear-gradient(180deg,#748d23,#576d18) !important;
+  border-color:var(--acid-soft) !important;
+}
+#creazione-pozione .dice-box > *,
+#creazione-pozione .result-line > *{
+  min-width:0 !important;
+}
+#creazione-pozione .result-line{
+  padding:9px 0 !important;
+  border-bottom:1px solid rgba(80,89,87,.28) !important;
+}
+#creazione-pozione .result-line:last-child{
+  border-bottom:0 !important;
+}
+#creazione-pozione .inventory-box.has-prep-malus{
+  border-left-color:var(--danger) !important;
+  background:linear-gradient(90deg,rgba(58,32,39,.38),rgba(16,18,19,.78)) !important;
+}
+#creazione-pozione .inventory-malus-note{
+  margin:0 0 10px !important;
+  padding:9px 11px !important;
+  border:1px solid rgba(201,104,124,.45) !important;
+  border-radius:7px !important;
+  background:rgba(201,104,124,.08) !important;
+  color:#ffd0da !important;
+  font-size:13px !important;
+  line-height:1.45 !important;
+}
+#creazione-pozione .technical-table-wrap{
+  overflow-x:auto !important;
+  padding:12px !important;
+}
+#creazione-pozione .technical-table-wrap table.bracket{
+  margin:0 !important;
+  min-width:620px !important;
+}
+#creazione-pozione .consequence-overview{
+  margin:16px 0 !important;
+  padding:15px 16px !important;
+  border:1px solid rgba(201,104,124,.45) !important;
+  border-left:4px solid var(--danger) !important;
+  border-radius:9px !important;
+  background:linear-gradient(90deg,rgba(58,32,39,.42),rgba(16,18,19,.72)) !important;
+}
+#creazione-pozione .consequence-overview-title{
+  margin:0 0 9px !important;
+  color:#ffd0da !important;
+  font-size:16px !important;
+  font-weight:700 !important;
+}
+#creazione-pozione .consequence-overview ul{
+  margin:0 !important;
+  padding-left:19px !important;
+}
+#creazione-pozione .consequence-overview li{
+  margin:5px 0 !important;
+  color:var(--text-soft) !important;
+  line-height:1.45 !important;
+}
+#creazione-pozione .consequence-overview-more{
+  margin:9px 0 0 !important;
+  color:var(--text-dim) !important;
+  font-size:12px !important;
+}
+#creazione-pozione .consequence-group-grid{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:12px !important;
+}
+#creazione-pozione .consequence-group{
+  min-width:0 !important;
+  padding:12px 13px !important;
+  border:1px solid rgba(80,89,87,.55) !important;
+  border-radius:8px !important;
+  background:rgba(255,255,255,.018) !important;
+}
+#creazione-pozione .consequence-group h4{
+  margin:0 0 8px !important;
+  color:var(--acid-soft) !important;
+  font-family:var(--serif) !important;
+  font-size:14px !important;
+}
+#creazione-pozione .consequence-group ul{
+  margin:0 !important;
+  padding-left:18px !important;
+}
+#creazione-pozione .consequence-group li{
+  margin:5px 0 !important;
+  color:var(--text-soft) !important;
+  font-size:12.5px !important;
+  line-height:1.5 !important;
+}
+#creazione-pozione .copy-btn,
+#creazione-pozione button.action{
+  white-space:normal !important;
+}
+@media(max-width:760px){
+  #creazione-pozione .selected-potion-grid,
+  #creazione-pozione .consequence-group-grid{
+    grid-template-columns:1fr !important;
+  }
+  #creazione-pozione .selected-potion-title{
+    display:block !important;
+  }
+  #creazione-pozione .selected-potion-badge{
+    display:inline-block !important;
+    margin-top:7px !important;
+  }
+  #creazione-pozione .step-actions{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+  }
+  #creazione-pozione .step-actions button.action{
+    width:100% !important;
+  }
+}
 
 </style>
 
@@ -2752,13 +3048,19 @@
  
  function fallbackCopyText(txt){ 
  var ta = document.createElement("textarea"); 
+ var sx = window.pageXOffset || document.documentElement.scrollLeft || 0;
+ var sy = window.pageYOffset || document.documentElement.scrollTop || 0;
  ta.value = txt; 
  ta.setAttribute("readonly", ""); 
- ta.style.position = "fixed"; 
- ta.style.top = "0"; 
+ ta.setAttribute("aria-hidden", "true");
+ ta.style.position = "absolute"; 
+ ta.style.top = (sy + 8) + "px"; 
  ta.style.left = "-9999px"; 
+ ta.style.width = "1px";
+ ta.style.height = "1px";
+ ta.style.opacity = "0";
  document.body.appendChild(ta); 
- ta.focus(); 
+ try{ ta.focus({preventScroll:true}); }catch(eFocus){ ta.focus(); }
  ta.select(); 
  ta.setSelectionRange(0, txt.length); 
  var ok = false; 
@@ -2767,14 +3069,17 @@
  } catch(e){ 
  ok = false; 
  } 
- document.body.removeChild(ta); 
+ document.body.removeChild(ta);
+ try{ window.scrollTo(sx, sy); }catch(eScroll){}
  return ok; 
  } 
  
  function attachCopy(btnId, sourceId){ 
  var btn = document.getElementById(btnId); 
- if(!btn){ return; } 
- btn.addEventListener(EV, function(){ 
+ if(!btn){ return; }
+ btn.type = "button";
+ btn.addEventListener(EV, function(ev){
+ if(ev){ ev.preventDefault(); ev.stopPropagation(); }
  var src = document.getElementById(sourceId); 
  if(!src){ flashCopied(btn, false); return; } 
  var txt = src.textContent; 
@@ -2801,9 +3106,12 @@
  
  function attachCopyPlain(btnId, sourceId){ 
  var btn = document.getElementById(btnId); 
- if(!btn){ return; } 
- btn.addEventListener(EV, function(){ 
- var src = document.getElementById(sourceId); 
+ if(!btn){ return; }
+ btn.type = "button";
+ btn.addEventListener(EV, function(ev){
+ if(ev){ ev.preventDefault(); ev.stopPropagation(); }
+ var src = document.getElementById(sourceId);
+ if(!src){ flashCopied(btn, false); return; }
  var txt = src.getAttribute("data-plain"); 
  if(!txt){ txt = src.textContent; } 
  var handledAsync = false; 
@@ -3518,9 +3826,45 @@ function renderAll(){
  var p = el("div", "panel"); 
  p.appendChild(el("h2", null, "Per prima cosa: che Pozione vuoi creare?")); 
  p.appendChild(el("div","guide-text","Puoi scegliere una Pozione dal Pozionario allegato: Nome, Classificazione, Forza Standard e fasce di Ingredienti vengono compilati automaticamente. In alternativa scegli l'inserimento manuale e compila i dati direttamente."));
- var pozSelWrap=el("div");var pozSelLabel=elText("label",null,"Pozione dal Pozionario");pozSelLabel.htmlFor="pozionario-select";pozSelWrap.appendChild(pozSelLabel);var pozSel=el("select");pozSel.id="pozionario-select";var potionIdentityLocked=pozV88IngredientPotionLocked();var pozManual=elText("option",null,"— inserimento manuale —");pozManual.value="";pozSel.appendChild(pozManual);for(var pzix=0;pzix<POZIONARIO.length;pzix++){var pzo=elText("option",null,POZIONARIO[pzix].n);pzo.value=POZIONARIO[pzix].n;if(POZ.pozionarioNome===pzo.value){pzo.selected=true;}pozSel.appendChild(pzo);}pozSel.disabled=potionIdentityLocked;pozSel.addEventListener("change",function(){if(potionIdentityLocked){return;}var oldPoz=POZ.pozionarioNome;var newPoz=pozSel.value;var changed=oldPoz!==newPoz;POZ.pozionarioNome=newPoz;if(newPoz&&POZIONARIO_BY_NAME[newPoz]){var entry=POZIONARIO_BY_NAME[newPoz];POZ.nome=entry.n;POZ.classificazione=entry.c;POZ.forzaStandard=entry.f;if(entry.i){POZ.tierBase=!!entry.b;POZ.tierIV=!!entry.iv;POZ.tierV=!!entry.v;}else{POZ.tierBase=false;POZ.tierIV=false;POZ.tierV=false;}}else if(oldPoz){POZ.nome="";POZ.classificazione="";POZ.forzaStandard="";POZ.tierBase=false;POZ.tierIV=false;POZ.tierV=false;POZ.illegale=false;}if(changed){pozV88ResetIngredientIllegalGate();invalidatePotionIdentityConfirmation();invalidateIllegalDiscoveryAll();}renderAll();});pozSelWrap.appendChild(pozSel);p.appendChild(pozSelWrap);if(potionIdentityLocked){p.appendChild(el("div","illegal-action-gate locked","<b>Pozione bloccata.</b> Hai già avviato il controllo dell'Azione Illegale: questa Pozione non può più essere cambiata."));}if(POZ.pozionarioNome&&POZIONARIO_BY_NAME[POZ.pozionarioNome]&&!POZIONARIO_BY_NAME[POZ.pozionarioNome].i){p.appendChild(el("p","small-note","Per questa voce il Pozionario allegato non contiene una sezione Ingredienti e dosi leggibile: seleziona manualmente le fasce di Ingredienti."));}
+ var pozSelWrap=el("div","info-selector-card");var pozSelLabel=elText("label",null,"Pozione dal Pozionario");pozSelLabel.htmlFor="pozionario-select";pozSelWrap.appendChild(pozSelLabel);var pozSel=el("select");pozSel.id="pozionario-select";var potionIdentityLocked=pozV88IngredientPotionLocked();var pozManual=elText("option",null,"— inserimento manuale —");pozManual.value="";pozSel.appendChild(pozManual);for(var pzix=0;pzix<POZIONARIO.length;pzix++){var pzo=elText("option",null,POZIONARIO[pzix].n);pzo.value=POZIONARIO[pzix].n;if(POZ.pozionarioNome===pzo.value){pzo.selected=true;}pozSel.appendChild(pzo);}pozSel.disabled=potionIdentityLocked;pozSel.addEventListener("change",function(){if(potionIdentityLocked){return;}var oldPoz=POZ.pozionarioNome;var newPoz=pozSel.value;var changed=oldPoz!==newPoz;POZ.pozionarioNome=newPoz;if(newPoz&&POZIONARIO_BY_NAME[newPoz]){var entry=POZIONARIO_BY_NAME[newPoz];POZ.nome=entry.n;POZ.classificazione=entry.c;POZ.forzaStandard=entry.f;if(entry.i){POZ.tierBase=!!entry.b;POZ.tierIV=!!entry.iv;POZ.tierV=!!entry.v;}else{POZ.tierBase=false;POZ.tierIV=false;POZ.tierV=false;}}else if(oldPoz){POZ.nome="";POZ.classificazione="";POZ.forzaStandard="";POZ.tierBase=false;POZ.tierIV=false;POZ.tierV=false;POZ.illegale=false;}if(changed){pozV88ResetIngredientIllegalGate();invalidatePotionIdentityConfirmation();invalidateIllegalDiscoveryAll();}renderAll();});pozSelWrap.appendChild(pozSel);p.appendChild(pozSelWrap);
+ if(POZ.pozionarioNome && POZIONARIO_BY_NAME[POZ.pozionarioNome]){
+  var selectedEntry=POZIONARIO_BY_NAME[POZ.pozionarioNome];
+  var selectedCard=el("div","selected-potion-card");
+  var selectedHead=el("div","selected-potion-title");
+  selectedHead.appendChild(elText("strong",null,POZ.nome||selectedEntry.n));
+  selectedHead.appendChild(elText("span","selected-potion-badge","Selezionata dal Pozionario"));
+  selectedCard.appendChild(selectedHead);
+  var selectedGrid=el("div","selected-potion-grid");
+  function addSelectedPotionStat(label,value){
+   var stat=el("div","selected-potion-stat");
+   stat.appendChild(elText("small",null,label));
+   stat.appendChild(elText("span",null,value));
+   selectedGrid.appendChild(stat);
+  }
+  addSelectedPotionStat("Classificazione",POZ.classificazione||"—");
+  addSelectedPotionStat("Forza Standard",POZ.forzaStandard||"—");
+  var tierLabels=[];
+  if(POZ.tierBase){tierLabels.push("X–XXX");}
+  if(POZ.tierIV){tierLabels.push("XXXX");}
+  if(POZ.tierV){tierLabels.push("XXXXX");}
+  addSelectedPotionStat("Ingredienti",tierLabels.length?tierLabels.join(", "):"da verificare");
+  selectedCard.appendChild(selectedGrid);
+  p.appendChild(selectedCard);
+ }if(potionIdentityLocked){p.appendChild(el("div","illegal-action-gate locked","<b>Pozione bloccata.</b> Hai già avviato il controllo dell'Azione Illegale: questa Pozione non può più essere cambiata."));}if(POZ.pozionarioNome&&POZIONARIO_BY_NAME[POZ.pozionarioNome]&&!POZIONARIO_BY_NAME[POZ.pozionarioNome].i){p.appendChild(el("p","small-note","Per questa voce il Pozionario allegato non contiene una sezione Ingredienti e dosi leggibile: seleziona manualmente le fasce di Ingredienti."));}
  var pozionarioLocked=!!currentPozionarioEntry()||potionIdentityLocked;
- if(pozionarioLocked){p.appendChild(elText("p","small-note","I dati compilati dal Pozionario sono bloccati per evitare di scollegare accidentalmente la ricetta dai suoi Ingredienti. Per modificarli, scegli prima “inserimento manuale”."));}
+ var tierFieldsLocked=potionIdentityLocked || !!(currentPozionarioEntry() && currentPozionarioEntry().i);
+ var recipeFieldsHost=p;
+ if(pozionarioLocked && currentPozionarioEntry()){
+  var recipeDetails=el("details","setup-details");
+  if(!currentPozionarioEntry().i){recipeDetails.open=true;}
+  recipeDetails.appendChild(elText("summary",null,currentPozionarioEntry().i?"Dati della ricetta compilati automaticamente":"Completa le fasce di Ingredienti"));
+  var recipeDetailsBody=el("div","setup-details-body");
+  recipeDetails.appendChild(recipeDetailsBody);
+  p.appendChild(recipeDetails);
+  recipeFieldsHost=recipeDetailsBody;
+ }else if(pozionarioLocked){
+  p.appendChild(elText("p","small-note","I dati della Pozione sono bloccati perché è già stato avviato un controllo dell’Azione Illegale."));
+ }
  var row=el("div","row"); 
  
  var d1 = el("div"); 
@@ -3545,22 +3889,32 @@ function renderAll(){
  sel.addEventListener("change",function(){if(POZ.classificazione!==sel.value){POZ.classificazione=sel.value;POZ.pozionarioNome="";invalidateFromPotionClassificationNow();}renderAll();}); 
  d2.appendChild(sel); 
  row.appendChild(d2);var d3=el("div");var forzaLbl=elText("label",null,"Forza Standard");forzaLbl.htmlFor="poz-forza-standard";d3.appendChild(forzaLbl);var inpForzaStd=el("input");inpForzaStd.type="number";inpForzaStd.id="poz-forza-standard";inpForzaStd.min="1";inpForzaStd.step="1";inpForzaStd.placeholder="es. 250";inpForzaStd.value=POZ.forzaStandard;inpForzaStd.readOnly=pozionarioLocked;inpForzaStd.addEventListener("input",function(){if(pozionarioLocked){return;}POZ.forzaStandard=inpForzaStd.value;});d3.appendChild(inpForzaStd);row.appendChild(d3);
- p.appendChild(row); 
- 
- p.appendChild(el("div", "divider")); 
- p.appendChild(el("p", null, "<b>Quali fasce di Ingredienti compaiono nella ricetta?</b> (serve per la fase di Preparazione degli Ingredienti, dove si lancia un d14 per ogni fascia presente)")); 
+ recipeFieldsHost.appendChild(row); 
+
+ recipeFieldsHost.appendChild(el("div", "divider")); 
+ recipeFieldsHost.appendChild(el("p", null, "<b>Fasce di Ingredienti della ricetta</b> — servono per determinare i d14 della Preparazione.")); 
  
  var chk1 = el("div", "chk-line"); 
- var c1=el("input");c1.type="checkbox";c1.id="poz-tier-base";c1.checked=POZ.tierBase;c1.disabled=pozionarioLocked;c1.addEventListener("change",function(){if(pozionarioLocked){return;}POZ.tierBase=c1.checked;invalidateFromPotionTiersNow();});chk1.appendChild(c1);var c1l=elText("label",null,"Presenti Ingredienti di Classificazione X, XX e/o XXX");c1l.htmlFor=c1.id;chk1.appendChild(c1l); 
- p.appendChild(chk1); 
+ var c1=el("input");c1.type="checkbox";c1.id="poz-tier-base";c1.checked=POZ.tierBase;c1.disabled=tierFieldsLocked;c1.addEventListener("change",function(){if(tierFieldsLocked){return;}POZ.tierBase=c1.checked;invalidateFromPotionTiersNow();});chk1.appendChild(c1);var c1l=elText("label",null,"Presenti Ingredienti di Classificazione X, XX e/o XXX");c1l.htmlFor=c1.id;chk1.appendChild(c1l); 
+ recipeFieldsHost.appendChild(chk1); 
  
  var chk2 = el("div", "chk-line"); 
- var c2=el("input");c2.type="checkbox";c2.id="poz-tier-iv";c2.checked=POZ.tierIV;c2.disabled=pozionarioLocked;c2.addEventListener("change",function(){if(pozionarioLocked){return;}POZ.tierIV=c2.checked;invalidateFromPotionTiersNow();});chk2.appendChild(c2);var c2l=elText("label",null,"Presenti Ingredienti di Classificazione XXXX");c2l.htmlFor=c2.id;chk2.appendChild(c2l); 
- p.appendChild(chk2); 
+ var c2=el("input");c2.type="checkbox";c2.id="poz-tier-iv";c2.checked=POZ.tierIV;c2.disabled=tierFieldsLocked;c2.addEventListener("change",function(){if(tierFieldsLocked){return;}POZ.tierIV=c2.checked;invalidateFromPotionTiersNow();});chk2.appendChild(c2);var c2l=elText("label",null,"Presenti Ingredienti di Classificazione XXXX");c2l.htmlFor=c2.id;chk2.appendChild(c2l); 
+ recipeFieldsHost.appendChild(chk2); 
  
  var chk3 = el("div", "chk-line"); 
- var c3=el("input");c3.type="checkbox";c3.id="poz-tier-v";c3.checked=POZ.tierV;c3.disabled=pozionarioLocked;c3.addEventListener("change",function(){if(pozionarioLocked){return;}POZ.tierV=c3.checked;invalidateFromPotionTiersNow();});chk3.appendChild(c3);var c3l=elText("label",null,"Presenti Ingredienti di Classificazione XXXXX");c3l.htmlFor=c3.id;chk3.appendChild(c3l); 
- p.appendChild(chk3); 
+ var c3=el("input");c3.type="checkbox";c3.id="poz-tier-v";c3.checked=POZ.tierV;c3.disabled=tierFieldsLocked;c3.addEventListener("change",function(){if(tierFieldsLocked){return;}POZ.tierV=c3.checked;invalidateFromPotionTiersNow();});chk3.appendChild(c3);var c3l=elText("label",null,"Presenti Ingredienti di Classificazione XXXXX");c3l.htmlFor=c3.id;chk3.appendChild(c3l); 
+ recipeFieldsHost.appendChild(chk3); 
+
+ if(POZ.nome || POZ.pozionarioNome){
+  var nextCard=el("div","setup-next-card");
+  nextCard.appendChild(elText("div","setup-next-title","Cosa devi fare adesso"));
+  nextCard.appendChild(el("ol",null,
+   "<li><b>Conferma la Conoscenza della Pozione</b> qui sotto.</li>" +
+   "<li>Apri <b>Situazioni particolari</b> solo se usi una Valigetta speciale, un Laboratorio non registrato o stai creando una Pozione illegale.</li>" +
+   "<li>Quando è tutto corretto, passa a <b>Personaggio</b>.</li>"));
+  p.appendChild(nextCard);
+ }
 
  var knowLine = el("div", "chk-line");
  var know=el("input");know.type="checkbox";know.id="poz-conoscenza";know.checked=!!POZ.conoscenzaPosseduta;
@@ -3578,27 +3932,35 @@ function renderAll(){
  var v80LawOverview=pozV80BuildRecipeLawBox(null);if(v80LawOverview){p.appendChild(v80LawOverview);}
  var v88InfoIngredientWarning=pozV88BuildInfoIngredientWarning();if(v88InfoIngredientWarning){p.appendChild(v88InfoIngredientWarning);}
 
+ var specialDetails=el("details","conditional-options");
+ var specialActive=!!(POZ.valigettaAdduco || usingIllegalValigetta() || POZ.laboratorioNonRegistrato || POZ.illegale);
+ if(specialActive){specialDetails.open=true;specialDetails.className+=" has-active";}
+ specialDetails.appendChild(elText("summary",null,specialActive?"Situazioni particolari — opzioni attive":"Situazioni particolari — apri solo se servono"));
+ var specialBody=el("div","conditional-options-body");
+ specialDetails.appendChild(specialBody);
+ p.appendChild(specialDetails);
+
  var adducoLine = el("div", "chk-line");
  var adduco=el("input");adduco.type="checkbox";adduco.id="poz-adduco";adduco.checked=!!POZ.valigettaAdduco;
  adduco.addEventListener("change", function(){ POZ.valigettaAdduco = adduco.checked; if(adduco.checked){POZ.valigettaIllegale=true;} renderAll(); });
  adducoLine.appendChild(adduco);
  var adducoLbl=elText("label",null,"La Pozione viene creata in una Valigetta del Pozionista ottenuta con Adduco Maxima (-50% della Forza finale)");adducoLbl.htmlFor=adduco.id;adducoLine.appendChild(adducoLbl);
- p.appendChild(adducoLine);
- p.appendChild(el("p", "small-note", "Caso speciale: Adduco Maxima rende la Valigetta illegale e dimezza permanentemente la Forza delle Pozioni create al suo interno. Il malus viene applicato nel Riepilogo Finale dopo gli altri modificatori di Forza."));
+ specialBody.appendChild(adducoLine);
+ specialBody.appendChild(el("p", "small-note", "Caso speciale: Adduco Maxima rende la Valigetta illegale e dimezza permanentemente la Forza delle Pozioni create al suo interno. Il malus viene applicato nel Riepilogo Finale dopo gli altri modificatori di Forza."));
 
  var valIllegalLine=el("div","chk-line");
  var valIllegal=el("input");valIllegal.type="checkbox";valIllegal.id="poz-valigetta-illegale";valIllegal.checked=usingIllegalValigetta();valIllegal.disabled=!!POZ.valigettaAdduco;
  valIllegal.addEventListener("change",function(){POZ.valigettaIllegale=valIllegal.checked;renderAll();});
  valIllegalLine.appendChild(valIllegal);
- var valIllegalLbl=elText("label",null,"Sto usando una Valigetta del Pozionista illegale / senza licenza (anche una Valigetta aggiuntiva prodotta illegalmente)");valIllegalLbl.htmlFor=valIllegal.id;valIllegalLine.appendChild(valIllegalLbl);p.appendChild(valIllegalLine);
- p.appendChild(elText("p","small-note",POZ.valigettaAdduco?"Adduco Maxima rende automaticamente illegale la Valigetta: l'opzione resta attiva finché usi questa Valigetta.":"Questa voce è distinta dalla Pozione illegale: riguarda il contenitore/laboratorio portatile. Se attiva, ogni dado di una fase di creazione, compresa l’eventuale Distillazione, richiede anche la relativa Azione Illegale."));
+ var valIllegalLbl=elText("label",null,"Sto usando una Valigetta del Pozionista illegale / senza licenza (anche una Valigetta aggiuntiva prodotta illegalmente)");valIllegalLbl.htmlFor=valIllegal.id;valIllegalLine.appendChild(valIllegalLbl);specialBody.appendChild(valIllegalLine);
+ specialBody.appendChild(elText("p","small-note",POZ.valigettaAdduco?"Adduco Maxima rende automaticamente illegale la Valigetta: l'opzione resta attiva finché usi questa Valigetta.":"Questa voce è distinta dalla Pozione illegale: riguarda il contenitore/laboratorio portatile. Se attiva, ogni dado di una fase di creazione, compresa l’eventuale Distillazione, richiede anche la relativa Azione Illegale."));
 
  var labIllegalLine=el("div","chk-line");
  var labIllegal=el("input");labIllegal.type="checkbox";labIllegal.id="poz-laboratorio-non-registrato";labIllegal.checked=!!POZ.laboratorioNonRegistrato;
  labIllegal.addEventListener("change",function(){POZ.laboratorioNonRegistrato=labIllegal.checked;renderAll();});
  labIllegalLine.appendChild(labIllegal);
- var labIllegalLbl=elText("label",null,"Sto usando un Laboratorio Privato non registrato al Ministero (solo se il PG Adulto può possederne uno)");labIllegalLbl.htmlFor=labIllegal.id;labIllegalLine.appendChild(labIllegalLbl);p.appendChild(labIllegalLine);
- p.appendChild(elText("p","small-note",POZ.laboratorioNonRegistrato?"Laboratorio non registrato: la scelta di non registrarlo costituisce una singola Azione Illegale distinta dalla creazione della Pozione e dalla Valigetta illegale. Il PG esegue il controllo generico (base 1d100, colto in flagrante con 1-30 prima dei modificatori contestuali) e contatta il Narratore soltanto se viene scoperto. Non si ripete automaticamente a ogni fase.":"Il Laboratorio Privato non registrato è un caso distinto: non selezionarlo per una normale Postazione scolastica, un Laboratorio registrato o una Valigetta."));
+ var labIllegalLbl=elText("label",null,"Sto usando un Laboratorio Privato non registrato al Ministero (solo se il PG Adulto può possederne uno)");labIllegalLbl.htmlFor=labIllegal.id;labIllegalLine.appendChild(labIllegalLbl);specialBody.appendChild(labIllegalLine);
+ specialBody.appendChild(elText("p","small-note",POZ.laboratorioNonRegistrato?"Laboratorio non registrato: la scelta di non registrarlo costituisce una singola Azione Illegale distinta dalla creazione della Pozione e dalla Valigetta illegale. Il PG esegue il controllo generico (base 1d100, colto in flagrante con 1-30 prima dei modificatori contestuali) e contatta il Narratore soltanto se viene scoperto. Non si ripete automaticamente a ogni fase.":"Il Laboratorio Privato non registrato è un caso distinto: non selezionarlo per una normale Postazione scolastica, un Laboratorio registrato o una Valigetta."));
 
  var illegalLine=el("div","chk-line");
  var unresolvedCreation=!!(currentPozionarioEntry()&&pozV81PotionCreationLegalityUnresolved(currentPozionarioEntry().n));
@@ -3613,21 +3975,26 @@ function renderAll(){
  else if(pozV80KnownPotionLegal()){illegalLabelText=POZ.illegale?"Creazione della Pozione illegale — determinato automaticamente":"Creazione della Pozione non illegale — determinato automaticamente";}
  else{illegalLabelText="La creazione della Pozione inserita manualmente è illegale";}
  var illegalLbl=elText("label",null,illegalLabelText);
- illegalLbl.htmlFor=illegalChk.id;illegalLine.appendChild(illegalLbl);p.appendChild(illegalLine);
+ illegalLbl.htmlFor=illegalChk.id;illegalLine.appendChild(illegalLbl);specialBody.appendChild(illegalLine);
  if(unresolvedCreation){
-  p.appendChild(elText("p","small-note","Il Pozionario contrassegna questa Pozione come vietata per alcuni utilizzi, ma la sua scheda non dichiara esplicitamente illegale anche la <b>creazione</b>. Per non inventare un reato, il tool non attiva automaticamente il controllo specifico 1d30/1d50 di Produzione/Uso della Bacchetta. Va uniformato il regolamento se si vuole estendere il divieto anche alla creazione."));
+  specialBody.appendChild(elText("p","small-note","Il Pozionario contrassegna questa Pozione come vietata per alcuni utilizzi, ma la sua scheda non dichiara esplicitamente illegale anche la <b>creazione</b>. Per non inventare un reato, il tool non attiva automaticamente il controllo specifico 1d30/1d50 di Produzione/Uso della Bacchetta. Va uniformato il regolamento se si vuole estendere il divieto anche alla creazione."));
  }else{
-  p.appendChild(elText("p","small-note",pozV80KnownPotionLegal()?"Per le Pozioni del catalogo il tool attiva il controllo specifico solo quando la scheda corrente dichiara esplicitamente illegale/proibita anche la creazione. Il controllo vale anche se le fasi vengono risolte OFFGame: il regolamento delle Azioni Illegali richiede il 1d30/1d50 in Produzione e Uso della Bacchetta per la creazione di una Pozione illegale.":"Per una Pozione inserita manualmente indica tu la legalità. La legalità degli Ingredienti e quella di Valigetta/Laboratorio restano controlli separati e non trasformano automaticamente una Pozione legale in una Pozione illegale."));
+  specialBody.appendChild(elText("p","small-note",pozV80KnownPotionLegal()?"Per le Pozioni del catalogo il tool attiva il controllo specifico solo quando la scheda corrente dichiara esplicitamente illegale/proibita anche la creazione. Il controllo vale anche se le fasi vengono risolte OFFGame: il regolamento delle Azioni Illegali richiede il 1d30/1d50 in Produzione e Uso della Bacchetta per la creazione di una Pozione illegale.":"Per una Pozione inserita manualmente indica tu la legalità. La legalità degli Ingredienti e quella di Valigetta/Laboratorio restano controlli separati e non trasformano automaticamente una Pozione legale in una Pozione illegale."));
  }
- if(POZ.illegale){p.appendChild(buildIllegalProtectionConfig());}
+ if(POZ.illegale){specialBody.appendChild(buildIllegalProtectionConfig());}
 
- p.appendChild(el("div", "divider")); 
- var nextBtn = el("button", "action", "Vai a: Personaggio &#8594;"); 
+ p.appendChild(el("div", "divider"));
+ var actions=el("div","step-actions");
+ var nextBtn = el("button", "action primary", "Continua: Personaggio &#8594;"); 
+ nextBtn.type="button";
  nextBtn.addEventListener(EV, function(){
   if(["X","XX","XXX","XXXX","XXXXX"].indexOf(POZ.classificazione)===-1||(!POZ.tierBase&&!POZ.tierIV&&!POZ.tierV)){window.alert("Seleziona la Classificazione e almeno una fascia di Ingredienti prima di proseguire.");return;}if(!positiveInt(POZ.forzaStandard)){window.alert("Inserisci la Forza Standard della Pozione.");return;}if(!POZ.conoscenzaPosseduta){window.alert("Conferma che il creatore possiede la Conoscenza della Pozione.");return;}
   goPozioniStep("pg");
  }); 
- p.appendChild(nextBtn);var resetBtn=el("button","action danger","Azzera questa Pozione");var gateForReset=pozV88EnsureIngredientIllegalGate();if(gateForReset.started||pozV89CreationGateAnyStarted()){resetBtn.disabled=true;resetBtn.title="Un controllo dell’Azione Illegale è già stato avviato: questa Pozione non può essere azzerata o cambiata durante la procedura.";}resetBtn.addEventListener(EV,function(){if(resetBtn.disabled){return;}if(window.confirm("Vuoi davvero azzerare tutti i dati della Pozione nella sessione corrente? Il nome del PG verrà mantenuto, ma i dati della Pozione e tutti i risultati delle fasi saranno cancellati.")){resetAllState(true);}});p.appendChild(resetBtn);p.appendChild(el("p","small-note","Questa azione azzera soltanto la Pozione nella sessione corrente e mantiene il nome del PG. Per creare una Pozione separata usa «Sessioni» e «+ Nuova Pozione». Ricaricando la pagina torni all’elenco delle sessioni Firebase."));
+ actions.appendChild(nextBtn);
+ var resetBtn=el("button","action danger","Azzera questa Pozione");resetBtn.type="button";var gateForReset=pozV88EnsureIngredientIllegalGate();if(gateForReset.started||pozV89CreationGateAnyStarted()){resetBtn.disabled=true;resetBtn.title="Un controllo dell’Azione Illegale è già stato avviato: questa Pozione non può essere azzerata o cambiata durante la procedura.";}resetBtn.addEventListener(EV,function(){if(resetBtn.disabled){return;}if(window.confirm("Vuoi davvero azzerare tutti i dati della Pozione nella sessione corrente? Il nome del PG verrà mantenuto, ma i dati della Pozione e tutti i risultati delle fasi saranno cancellati.")){resetAllState(true);}});actions.appendChild(resetBtn);
+ p.appendChild(actions);
+ p.appendChild(el("p","small-note","«Azzera questa Pozione» cancella soltanto la Pozione nella sessione corrente e mantiene il nome del PG. Per una Pozione separata usa «Sessioni» → «+ Nuova Pozione»."));
  container.appendChild(p);
  }
  
@@ -7397,6 +7764,10 @@ function renderImbottStep(container){
    " (" + forzaFormulaInventario + ") | Creata da " + pg.nome +
    " con " + effectiveTechnique(pg) + " Tecnica" + (globalTechniqueBonusInfo(pg).bonus ? " ("+pg.tecnica+" base +"+globalTechniqueBonusInfo(pg).bonus+" bonus)" : "") + roleInventario +
    " - " + spazioInventario);
+ var prepMalusInventario = (prepAcc && Number(prepAcc.durata) < 0) ? Number(prepAcc.durata) : 0;
+ if(!zeroDosiUtili && prepMalusInventario < 0){
+   inventarioTesto += " | Durata effetti/bonus-malus " + fmtPct(prepMalusInventario) + " (fallimento non rimediato nella Preparazione Ingredienti)";
+ }
  var bioInfoInventario=specialBiologicalComponentInfo();
  if(!zeroDosiUtili&&bioInfoInventario&&!specialBiologicalComponentAdded(pg)){inventarioTesto += " | " + bioInfoInventario.pending;}
 
@@ -7409,7 +7780,11 @@ function renderImbottStep(container){
  }
 
  var inventoryBox = el("div", "inventory-box");
+ if(prepMalusInventario < 0){ inventoryBox.className += " has-prep-malus"; }
  inventoryBox.appendChild(el("span", "inventory-label", zeroDosiUtili ? "Inventario" : "Frase pronta per l’Inventario"));
+ if(!zeroDosiUtili && prepMalusInventario < 0){
+  inventoryBox.appendChild(elText("div","inventory-malus-note","Attenzione: la frase include il malus " + fmtPct(prepMalusInventario) + " alla Durata degli effetti e dei bonus/malus dovuto a una Preparazione degli Ingredienti fallita e non rimediata."));
+ }
  var cartCode = el("div", "inventory-sentence"); cartCode.id = "riep-cart-" + pg.id;
  cartCode.textContent = inventarioTesto; cartCode.setAttribute("data-plain", inventarioTesto); inventoryBox.appendChild(cartCode);
  var cartCopy = el("button", "copy-btn", "Copia frase Inventario"); cartCopy.id = "riep-cart-copy-" + pg.id; cartCopy.style.marginTop = "10px";
@@ -7511,19 +7886,99 @@ function renderImbottStep(container){
  var r7 = el("tr", null, "<th>Fatica creazione + Extra+ + Oggetti/Conoscenze</th><td>-" + fmtFatica(faticaObbl) + " Fatica</td>");
  var r8 = el("tr", null, "<th>Fatica Distillazione</th><td>" + faticaDistTesto + "</td>");
  var r9=el("tr",null,"<th>Ingredienti da rimuovere dalla Dispensa</th><td>"+(dispensaInfo.complete?(dispensaInfo.total+" unità/dosi numeriche ("+dispensaInfo.base+" ricetta"+(dispensaInfo.extra>0?" + "+dispensaInfo.extra+" sostituzioni":"")+")"+(((dispensaInfo.externalNumeric&&dispensaInfo.externalNumeric.length)||dispensaInfo.nonNumerici.length)?" + voci separate":"")):"da completare")+"</td>");
- tbl.appendChild(r1); tbl.appendChild(r2); if(durataPercent !== 0){ tbl.appendChild(r3); } tbl.appendChild(r4); tbl.appendChild(r5); tbl.appendChild(r6); tbl.appendChild(r7); tbl.appendChild(r8);tbl.appendChild(r9); 
- out.appendChild(tbl); 
- 
- var detTitle = el("p", null, "<b>Dettaglio conseguenze</b>"); 
- out.appendChild(detTitle); 
- var ul = el("ul"); 
- for(var n=0;n<noteRighe.length;n++){ 
- var li = el("li", null, noteRighe[n]); 
- li.style.fontSize = ".85rem"; 
- li.style.marginBottom = "3px"; 
- ul.appendChild(li); 
- } 
- out.appendChild(ul); 
+ tbl.appendChild(r1); tbl.appendChild(r2); if(durataPercent !== 0){ tbl.appendChild(r3); } tbl.appendChild(r4); tbl.appendChild(r5); tbl.appendChild(r6); tbl.appendChild(r7); tbl.appendChild(r8);tbl.appendChild(r9);
+
+ /* Il riepilogo visuale sopra contiene già ciò che serve nell'uso quotidiano:
+    la tabella tecnica resta disponibile, ma non occupa spazio finché non viene richiesta. */
+ var techDetails=el("details","consequence-details");
+ techDetails.appendChild(elText("summary",null,"Dettaglio tecnico dei calcoli"));
+ var techBody=el("div","technical-table-wrap");
+ techBody.appendChild(tbl);
+ techDetails.appendChild(techBody);
+ out.appendChild(techDetails);
+
+ /* Conseguenze: prima emergono solo gli elementi che richiedono davvero attenzione;
+    il resto viene ordinato per argomento in una sezione richiudibile. */
+ var importantNotes=[];
+ function consequenceIsImportant(note){
+  var low=String(note||"").toLowerCase();
+  if(low.indexOf("fatica ")===0){return false;}
+  return low.indexOf("malus")!==-1 ||
+         low.indexOf("scoperto")!==-1 ||
+         low.indexOf("illegale")!==-1 ||
+         low.indexOf("esplos")!==-1 ||
+         low.indexOf("distrutt")!==-1 ||
+         low.indexOf("0 dosi")!==-1 ||
+         low.indexOf("nessuna dose")!==-1 ||
+         low.indexOf("non ancora")!==-1 ||
+         low.indexOf("resta da")!==-1 ||
+         low.indexOf("manca ")!==-1 ||
+         low.indexOf("non valido")!==-1 ||
+         low.indexOf("impossibile")!==-1 ||
+         low.indexOf("viola il regolamento")!==-1 ||
+         low.indexOf("salute")!==-1;
+ }
+ for(var inx=0;inx<noteRighe.length;inx++){
+  if(consequenceIsImportant(noteRighe[inx])){importantNotes.push(noteRighe[inx]);}
+ }
+ if(importantNotes.length){
+  var consequenceOverview=el("div","consequence-overview");
+  consequenceOverview.appendChild(elText("div","consequence-overview-title","Da ricordare"));
+  var importantList=el("ul");
+  var importantLimit=Math.min(6,importantNotes.length);
+  for(var imp=0;imp<importantLimit;imp++){importantList.appendChild(elText("li",null,importantNotes[imp]));}
+  consequenceOverview.appendChild(importantList);
+  if(importantNotes.length>importantLimit){
+   consequenceOverview.appendChild(elText("p","consequence-overview-more","Ci sono altri "+(importantNotes.length-importantLimit)+" dettagli rilevanti: li trovi nella sezione completa qui sotto."));
+  }
+  out.appendChild(consequenceOverview);
+ }
+
+ var detailGroups={
+  "Preparazione":[],
+  "Produzione":[],
+  "Uso della Bacchetta":[],
+  "Imbottigliamento e Pulizia":[],
+  "Distillazione":[],
+  "Fatica":[],
+  "Ingredienti e Dispensa":[],
+  "Legalità e rischi":[],
+  "Oggetti e modificatori":[],
+  "Altro":[]
+ };
+ function consequenceGroupFor(note){
+  var low=String(note||"").toLowerCase();
+  if(low.indexOf("fatica ")===0){return "Fatica";}
+  if(low.indexOf("preparazione")!==-1){return "Preparazione";}
+  if(low.indexOf("produzione")!==-1){return "Produzione";}
+  if(low.indexOf("bacchetta")!==-1 || low.indexOf("dosi finali")!==-1){return "Uso della Bacchetta";}
+  if(low.indexOf("imbottigliamento")!==-1 || low.indexOf("post finali")!==-1){return "Imbottigliamento e Pulizia";}
+  if(low.indexOf("distill")!==-1){return "Distillazione";}
+  if(low.indexOf("dispensa")!==-1 || low.indexOf("ingredient")!==-1 || low.indexOf("componente")!==-1 || low.indexOf("pozionario:")===0){return "Ingredienti e Dispensa";}
+  if(low.indexOf("illeg")!==-1 || low.indexOf("scoperto")!==-1 || low.indexOf("regolamento di hogwarts")!==-1){return "Legalità e rischi";}
+  if(low.indexOf("calderone")!==-1 || low.indexOf("valigetta")!==-1 || low.indexOf("manualità")!==-1 || low.indexOf("memoria")!==-1 || low.indexOf("sintesi")!==-1 || low.indexOf("oggett")!==-1 || low.indexOf("conoscenz")!==-1){return "Oggetti e modificatori";}
+  return "Altro";
+ }
+ for(var gn=0;gn<noteRighe.length;gn++){detailGroups[consequenceGroupFor(noteRighe[gn])].push(noteRighe[gn]);}
+
+ var consequenceDetails=el("details","consequence-details");
+ consequenceDetails.appendChild(elText("summary",null,"Tutte le conseguenze e i promemoria ("+noteRighe.length+")"));
+ var consequenceBody=el("div","consequence-details-body");
+ var consequenceGrid=el("div","consequence-group-grid");
+ var groupOrder=["Preparazione","Produzione","Uso della Bacchetta","Imbottigliamento e Pulizia","Distillazione","Fatica","Ingredienti e Dispensa","Legalità e rischi","Oggetti e modificatori","Altro"];
+ for(var go=0;go<groupOrder.length;go++){
+  var groupName=groupOrder[go], groupRows=detailGroups[groupName];
+  if(!groupRows.length){continue;}
+  var groupBox=el("section","consequence-group");
+  groupBox.appendChild(elText("h4",null,groupName));
+  var groupList=el("ul");
+  for(var gr=0;gr<groupRows.length;gr++){groupList.appendChild(elText("li",null,groupRows[gr]));}
+  groupBox.appendChild(groupList);
+  consequenceGrid.appendChild(groupBox);
+ }
+ consequenceBody.appendChild(consequenceGrid);
+ consequenceDetails.appendChild(consequenceBody);
+ out.appendChild(consequenceDetails);
  } 
  
  /* ---------- AUTO-ALTEZZA IFRAME ---------- */
